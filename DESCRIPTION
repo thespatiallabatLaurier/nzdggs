@@ -6,15 +6,7 @@ Authors@R:
            family = "Hojati",
            role = c("aut", "cre"),
            email = "hoja4090@mylaurier.ca",
-           comment = c(ORCID = "0000-0001-7350-0055")),
-    person(given = "Chiranjib",
-           family = "Chaudhuri",
-           role = c("ctb"),
-           email = "chiranjibchaudhuri@gmail.com"),
-    person(given = "Colin",
-           family = "Robertson",
-           role = c("ctb"),
-           email = "colinr23@gmail.com"))
+           comment = c(ORCID = "0000-0001-7350-0055")))
 Description: Manupulate and Run Analysis on Netezza Using IDEAS Model.
 License: `use_mit_license()`
 Encoding: UTF-8
