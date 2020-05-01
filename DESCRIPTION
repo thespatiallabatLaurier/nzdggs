@@ -1,4 +1,4 @@
-Package: Nzdggs
+Package: nzdggs
 Title: Manupulate and Run Analysis on Netezza Using IDEAS Model
 Version: 0.0.0.9000
 Authors@R: 
@@ -17,5 +17,5 @@ Imports:
     dplyr
 Suggests:
     dplyr
-URL: http://yihui.name/knitr/
-BugReports: https://github.com/yihui/knitr/issues
+URL: https://github.com/am2222/nzdggs
+BugReports: https://github.com/am2222/nzdggs/issues
