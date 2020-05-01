@@ -9,11 +9,11 @@ Authors@R:
            comment = c(ORCID = "0000-0001-7350-0055")),
     person(given = "Chiranjib",
            family = "Chaudhuri",
-           role = c("aut", "cre"),
+           role = c("ctb"),
            email = "chiranjibchaudhuri@gmail.com"),
     person(given = "Colin",
            family = "Robertson",
-           role = c("aut", "cre"),
+           role = c("ctb"),
            email = "colinr23@gmail.com"))
 Description: Manupulate and Run Analysis on Netezza Using IDEAS Model.
 License: `use_mit_license()`
