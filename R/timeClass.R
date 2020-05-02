@@ -2,52 +2,52 @@ library(R6)
 TimeClass <- R6Class("TimeClass",
                      public = list(
                        setBoundLimit = function(start,end)
-                         
+
                        {
-                         # TODO: must be in counstructor 
+                         # TODO: must be in counstructor
                          startp=as.POSIXlt(start)
                          endp=as.POSIXlt(end)
-                         
+
                          start=unclass(as.POSIXlt(start))
                          end=unclass(as.POSIXlt(end))
                          p=data.frame(res=private$resolution, start=rep(0,length(private$resolution)),end=rep(0,length(private$resolution)))
-                         
-                         
-                         
+
+
+
                          p[1,]$start=1
                          p[1,]$end=(end$year-start$year)/1000
-                         
+
                          p[2,]$start=1+p[1,]$end
                          p[2,]$end=(end$year-start$year)/500+p[1,]$end
-                         
+
                          p[3,]$start=1+p[2,]$end
                          p[3,]$end=(end$year-start$year)/100+p[2,]$end
-                         
+
                          p[4,]$start=1+p[3,]$end
                          p[4,]$end=(end$year-start$year)/50+p[3,]$end
-                         
+
                          p[5,]$start=1+p[4,]$end
                          p[5,]$end=(end$year-start$year)/10+p[4,]$end
-                         
+
                          p[6,]$start=1+p[5,]$end
                          p[6,]$end=(end$year-start$year)+p[5,]$end
-                         
+
                          p[7,]$start=1+p[6,]$end
                          p[7,]$end=(end$year-start$year)*12+p[6,]$end
-                         
+
                          #################################
                          p[8,]$start=1+p[7,]$end
                          p[8,]$end=as.numeric(difftime(endp,startp,units="week"))+p[7,]$end
                          ########################################
                          p[9,]$start=1+p[8,]$end
                          p[9,]$end=as.numeric(endp-startp)+p[8,]$end
-                         
+
                          p[10,]$start=1+p[9,]$end
                          p[10,]$end=as.numeric(endp-startp)*24+p[9,]$end
-                         
+
                          p[11,]$start=1+p[10,]$end
                          p[11,]$end=as.numeric(endp-startp)*24*60+p[10,]$end
-                         
+
                          p[12,]$start=1+p[11,]$end
                          p[12,]$end=as.numeric(endp-startp)*24*60*60+p[11,]$end
                          print(p)
@@ -56,7 +56,7 @@ TimeClass <- R6Class("TimeClass",
                          private$end=end
                        },
                        dateTimeToPOT=function(scale,year=NA,day=NA,month=NA){
-                         
+
                          # TODO: Fix overwrite functions
                          pf<-p[which(p$res == scale),]
                          if(nrow(pf)==0){
@@ -68,12 +68,12 @@ TimeClass <- R6Class("TimeClass",
                                      diff=abs(private$start$year-mydate$year)
                                      return(pf$start+diff)
                                    }
-                                   
+
                            )
                          }
-                         
-                         
-                         
+
+
+
                        }
                      ) ,
                      private = list(
@@ -84,12 +84,6 @@ TimeClass <- R6Class("TimeClass",
                      )
 )
 
-
-
-POT<-TimeClass$new()
-POT$setBoundLimit("1000-01-01 00:00:00","3000-01-01 00:00:00")
-year<-POT$dateTimeToPOT('1y',3600)
-print(year)
 
 
 
