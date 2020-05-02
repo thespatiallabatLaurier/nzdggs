@@ -18,8 +18,6 @@ Depends:
     here,
     RODBC,
     dplyr
-Imports:
-
 Suggests:
     dplyr
 URL: https://github.com/am2222/nzdggs

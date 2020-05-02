@@ -136,15 +136,19 @@ ImporterClass <- R6::R6Class("DataImporter",
 #' import_to_db
 #'
 #' @param directory Directory of CSV files
+#' @param DSN The NZ DSN
+#' @param value_type The type of Value possible options
+#' float, varchar, integer, bigint
+#' @param createTable Either make a new table and drop table if exists or make table
 #' @param table_name  Name of the table to import data into
-#' @param append add data to an existing table, if it is False we will make a new table
-#' @param drop drops table while creating a new table, Default is False
+#'
 #' @keywords netezza, import
 #' @return
 #' @export
 #'
 #' @examples
 #' import_to_db()
+
 import_to_db <- function(DSN,directory,table_name,value_type='varchar',createTable=T){
 
   if(dir.exists(file.path(directory))){
