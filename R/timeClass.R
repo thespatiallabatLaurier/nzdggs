@@ -85,7 +85,15 @@ TimeClass <- R6Class("TimeClass",
 )
 
 
+data_to_tid <- function(scale,time){
 
+  POT<-TimeClass$new()
+  POT$setBoundLimit("1000-01-01 00:00:00","3000-01-01 00:00:00")
+
+
+  result<-POT$dateTimeToPOT(scale,time)
+  return(result)
+}
 
 
 

@@ -13,10 +13,13 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.0
-Imports:
-    dplyr,
+Depends:
+    R6,
+    here,
     RODBC,
-    R6
+    dplyr
+Imports:
+
 Suggests:
     dplyr
 URL: https://github.com/am2222/nzdggs
