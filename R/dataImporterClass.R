@@ -1,5 +1,5 @@
-library(R6)
-library(RODBC)
+#library(R6)
+#library(RODBC)
 #' Class to import text files into netezza db using external table
 #' @examples
 #' importer <- ImporterClass$new()
@@ -8,7 +8,7 @@ library(RODBC)
 #'                          inputfilecolumns=list(name=c('id','value','dggid'),type=c('varchar(100)','varchar(100)','varchar(100)')),insert columns='CAST(dggid AS bigint),CAST(value AS float )',createTable = TRUE)
 #' importer$importDirectory('F:/DEM/')
 #' importer$importFile('F:/DEM/1.csv')
-ImporterClass <- R6Class("DataImporter",
+ImporterClass <- R6::R6Class("DataImporter",
                          public = list(
                           debug = FALSE,
                           #' Set DSN name for ODBC connecion

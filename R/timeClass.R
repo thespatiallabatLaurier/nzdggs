@@ -1,5 +1,5 @@
-library(R6)
-TimeClass <- R6Class("TimeClass",
+#library(R6)
+TimeClass <- R6::R6Class("TimeClass",
                      public = list(
                        setBoundLimit = function(start,end)
 
