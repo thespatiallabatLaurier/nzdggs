@@ -17,7 +17,12 @@ Depends:
     R6,
     here,
     RODBC,
-    dplyr
+    dplyr,
+    rgdal,
+    raster,
+    rgeos,
+    sp,
+    dggridR
 Suggests:
     dplyr
 URL: https://github.com/am2222/nzdggs
