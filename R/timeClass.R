@@ -2,8 +2,8 @@ TimeClass <- R6Class("TimeClass",
                      public = list(
 #' setBoundLimit
 #' Define TID bounds
-#' @param start the begining of TID "1000-01-01 00:00:00"
-#' @param end the end of TID "3000-01-01 00:00:00"
+#' @param start the begining of TID strptime( '01-01-1000 00:00:00', "%d-%m-%Y %H:%M:%S")
+#' @param end the end of TID strptime( '01-01-3000 00:00:00', "%d-%m-%Y %H:%M:%S")
 #'
 #' @return
 #' @export
@@ -15,51 +15,62 @@ TimeClass <- R6Class("TimeClass",
                          startp=as.POSIXlt(start)
                          endp=as.POSIXlt(end)
 
-                         start=unclass(as.POSIXlt(start))
-                         end=unclass(as.POSIXlt(end))
                          p=data.frame(res=private$resolution, start=rep(0,length(private$resolution)),end=rep(0,length(private$resolution)))
 
 
+                         startu=unclass(as.POSIXlt(start))
+                         endu=unclass(as.POSIXlt(end))
 
                          p[1,]$start=1
-                         p[1,]$end=(end$year-start$year)/1000
+                         p[1,]$end=(endu$year-startu$year)/1000
 
                          p[2,]$start=1+p[1,]$end
-                         p[2,]$end=(end$year-start$year)/500+p[1,]$end
+                         p[2,]$end=(endu$year-startu$year)/500+p[1,]$end
 
                          p[3,]$start=1+p[2,]$end
-                         p[3,]$end=(end$year-start$year)/100+p[2,]$end
+                         p[3,]$end=(endu$year-startu$year)/100+p[2,]$end
 
                          p[4,]$start=1+p[3,]$end
-                         p[4,]$end=(end$year-start$year)/50+p[3,]$end
+                         p[4,]$end=(endu$year-startu$year)/50+p[3,]$end
 
                          p[5,]$start=1+p[4,]$end
-                         p[5,]$end=(end$year-start$year)/10+p[4,]$end
+                         p[5,]$end=(endu$year-startu$year)/10+p[4,]$end
 
                          p[6,]$start=1+p[5,]$end
-                         p[6,]$end=(end$year-start$year)+p[5,]$end
+                         p[6,]$end=(endu$year-startu$year)+p[5,]$end
 
                          p[7,]$start=1+p[6,]$end
-                         p[7,]$end=(end$year-start$year)*12+p[6,]$end
+                         p[7,]$end=(endu$year-startu$year)*12+p[6,]$end
 
                          #################################
                          p[8,]$start=1+p[7,]$end
                          p[8,]$end=as.numeric(difftime(endp,startp,units="week"))+p[7,]$end
                          ########################################
                          p[9,]$start=1+p[8,]$end
-                         p[9,]$end=as.numeric(endp-startp)+p[8,]$end
+                         p[9,]$end=as.numeric(difftime(endp,startp,units="days"))+p[8,]$end
+
 
                          p[10,]$start=1+p[9,]$end
-                         p[10,]$end=as.numeric(endp-startp)*24+p[9,]$end
+                         p[10,]$end=(as.numeric(difftime(endp,startp,units="days"))*2)+p[9,]$end
 
                          p[11,]$start=1+p[10,]$end
-                         p[11,]$end=as.numeric(endp-startp)*24*60+p[10,]$end
+                         p[11,]$end=(as.numeric(difftime(endp,startp,units="days"))*4)+p[10,]$end
 
                          p[12,]$start=1+p[11,]$end
-                         p[12,]$end=as.numeric(endp-startp)*24*60*60+p[11,]$end
+                         p[12,]$end=(as.numeric(difftime(endp,startp,units="days"))*8)+p[11,]$end
+
+                         p[13,]$start=1+p[12,]$end
+                         p[13,]$end=(as.numeric(difftime(endp,startp,units="hours")))+p[12,]$end
+
+                         p[14,]$start=1+p[13,]$end
+                         p[14,]$end=(as.numeric(difftime(endp,startp,units="mins")))+p[13,]$end
+
+                         p[15,]$start=1+p[14,]$end
+                         p[15,]$end=(as.numeric(difftime(endp,startp,units="secs")))+p[14,]$end
+
                          private$p<-p
-                         private$start=start
-                         private$end=end
+                         private$start=startp
+                         private$end=endp
                        },
 #' dateTimeToPOT
 #' Convert date and time to TID scale.
@@ -72,44 +83,73 @@ TimeClass <- R6Class("TimeClass",
 #' @export
 #'
 #' @examples
-                       dateTimeToPOT=function(scale,date){
+                       dateTimeToPOT=function(date,scale){
                          pf<-private$p[which(private$p$res == scale),]
+
                          # TODO: Fix overwrite functions
 
                          if(nrow(pf)==0){
                            stop(paste("Scale is in wrong format. valid values are"),private$resolution)
                          }else{
-                           myDate<-as.POSIXlt(date)
-                           yearDiff=abs(private$start$year-myDate$year)
-                           private$leapYears=private$getLeapYear(private$start$year,myDate$year)
+
+                           myDate <- as.POSIXlt(date)
+                           print(myDate)
+                           #startu=unclass(private$start)
+                           #endu=unclass(myDate)
+                           mDiff = private$getElapsedMonths(myDate,private$start)
+                           #private$leapYears=private$getLeapYear(private$start$year,myDate$year)
 
                            switch (scale,
-                                   '1y' = {
-
-                                     diff<-yearDiff
-
+                                   'min'={
+                                      diff <- floor(as.numeric(difftime(myDate,private$start,units="mins"))*1)
                                    },
-                                   'm'={
-                                     yearOffset=yearDiff*12
-                                     diff<-yearOffset+abs(private$start$mon-myDate$mon)
-                                     # print(yearOffset)
+                                   's'={
+                                      diff <- floor(as.numeric(difftime(myDate,private$start,units="secs"))*1)
+                                   },
+                                   'h'={
+                                      diff <- floor(as.numeric(difftime(myDate,private$start,units="hours"))*1)
+                                   },
+                                   '3h'={
+                                      diff <- floor(as.numeric(difftime(myDate,private$start,units="days"))*8)
+                                   },
+                                   '6h'={
+                                      diff <- floor(as.numeric(difftime(myDate,private$start,units="days"))*4)
+                                   },
+                                   '12h'={
+                                      diff <- floor(as.numeric(difftime(myDate,private$start,units="days"))*2)
                                    },
                                    'd'={
-                                     dayOffset=yearDiff*365+private$leapYears
 
-                                     diff<-dayOffset+abs(private$start$yday-myDate$yday)
-                                     # print(diff)
+                                      diff <- floor(as.numeric(difftime(myDate,private$start,units="days"))*1)
 
-                                   },
+                                      },
                                    'w'={
-                                     dayOffset=yearDiff*365+private$leapYears
-
-                                     diff<-round(dayOffset+abs(private$start$yday-myDate$yday)/7)
-                                     # print(diff)
+                                      diff <- floor(as.numeric(difftime(private$start,myDate,units="week")))
+                                   },
+                                   'm'={
+                                     diff <- mDiff
+                                   },
+                                   '1y'={
+                                      diff <- floar(mDiff/(12*1))
+                                   },
+                                   '10y'={
+                                      diff <- (floar(mDiff/(12*10)))
+                                   },
+                                   '50y'={
+                                      diff <- (floar(mDiff/(12*50)))
+                                   },
+                                   '100y'={
+                                      diff <- (floar(mDiff/(12*100)))
+                                   },
+                                   '500y'={
+                                      diff <- (floar(mDiff/(12*500)))
+                                   },
+                                   '1000y'={
+                                      diff <- (floar(mDiff/(12*1000)))
                                    }
 
                            )
-                           result<- pf$start+diff
+                           result<- pf$start + diff
                            return(result)
                          }
 
@@ -128,7 +168,7 @@ TimeClass <- R6Class("TimeClass",
                        }
                      ) ,
                      private = list(
-                       resolution=c('1000y','500y','100y','50y','10y','1y','m','w','d','h','min','s'),
+                       resolution=c('1000y','500y','100y','50y','10y','1y','m','w','d','12h','6h','3h','h','min','s'),
                        p=NA,
                        start=NA,
                        end=NA,
@@ -142,6 +182,11 @@ TimeClass <- R6Class("TimeClass",
 
                          year--
                          return (round((year / 4) - (year / 100) + (year / 400)))
+                       },
+                       getElapsedMonths =  function(ed, sd) {
+                          #ed <- as.POSIXlt(end_date)
+                          #sd <- as.POSIXlt(start_date)
+                          12 * (ed$year - sd$year) + (ed$mon - sd$mon)
                        }
                      )
 )
@@ -152,16 +197,32 @@ TimeClass <- R6Class("TimeClass",
 #' @param datetime a date and time value in string format like '2016-01-02 00:00:00'. It must be
 #' between "1000-01-01 00:00:00" and "3000-01-01 00:00:00"
 #' @param scale the scale for TID. Must be one the following items
-#' '1000y','500y','100y','50y','10y','1y','m','w','d','h','min','s'
+#' '1000y','500y','100y','50y','10y','1y','m','w','d','12h','6h','3h','h','min','s'
 #'
 #' @return TID in an Integer format
 #' @export
 #'
 #' @examples
-#' convert_datetime_to_tid('1y','1980-01-01 00:00:00')
+#' convert_datetime_to_tid(strptime( '02-01-1980 00:00:00', "%d-%m-%Y %H:%M:%S"),'1y')
+#' #Another Example
+#' start <- as.Date("01-01-1980",format="%d-%m-%Y")
+#' end   <- as.Date("01-01-2020",format="%d-%m-%Y")
+#'
+#' theDate <- start
+#' df <- data.frame()
+#' names(df) <- c("time","tid")
+#' while (theDate <= end)
+#' {
+#'    t <- strptime(paste(format(theDate,"%d-%m-%Y")," 00:00:00"), "%d-%m-%Y %H:%M:%S")
+#'    tid <- convert_datetime_to_tid(t, "d")
+#'    print(tid)
+#'    df <- rbind(df, data.frame(time = t, tid = tid))
+#'    theDate <- seq.Date( theDate, length=2, by='1 years' )[2]
+#' }
+#'
 convert_datetime_to_tid <- function(datetime,scale){
    POT<-TimeClass$new()
-   POT$setBoundLimit("1000-01-01 00:00:00","3000-01-01 00:00:00")
+   POT$setBoundLimit(strptime( '01-01-1000 00:00:00', "%d-%m-%Y %H:%M:%S"),strptime( '01-01-3000 00:00:00', "%d-%m-%Y %H:%M:%S"))
   # # only 1y m and d works
    result<-POT$dateTimeToPOT(datetime,scale)
    return(result)

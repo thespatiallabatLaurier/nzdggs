@@ -12,7 +12,7 @@ convert_datetime_to_tid(datetime, scale)
 between "1000-01-01 00:00:00" and "3000-01-01 00:00:00"}
 
 \item{scale}{the scale for TID. Must be one the following items
-'1000y','500y','100y','50y','10y','1y','m','w','d','h','min','s'}
+'1000y','500y','100y','50y','10y','1y','m','w','d','12h','6h','3h','h','min','s'}
 }
 \value{
 TID in an Integer format
@@ -22,5 +22,21 @@ convert_datetime_to_tid
 Convert date and time to TID scale.
 }
 \examples{
-convert_datetime_to_tid('1y','1980-01-01 00:00:00')
+convert_datetime_to_tid(strptime( '02-01-1980 00:00:00', "\%d-\%m-\%Y \%H:\%M:\%S"),'1y')
+#Another Example
+start <- as.Date("01-01-1980",format="\%d-\%m-\%Y")
+end   <- as.Date("01-01-2020",format="\%d-\%m-\%Y")
+
+theDate <- start
+df <- data.frame()
+names(df) <- c("time","tid")
+while (theDate <= end)
+{
+   t <- strptime(paste(format(theDate,"\%d-\%m-\%Y")," 00:00:00"), "\%d-\%m-\%Y \%H:\%M:\%S")
+   tid <- convert_datetime_to_tid(t, "d")
+   print(tid)
+   df <- rbind(df, data.frame(time = t, tid = tid))
+   theDate <- seq.Date( theDate, length=2, by='1 years' )[2]
+}
+
 }

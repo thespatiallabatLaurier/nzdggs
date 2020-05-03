@@ -42,9 +42,9 @@ Convert date and time to TID scale.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{start}}{the begining of TID "1000-01-01 00:00:00"}
+\item{\code{start}}{the begining of TID strptime( '01-01-1000 00:00:00', "\%d-\%m-\%Y \%H:\%M:\%S")}
 
-\item{\code{end}}{the end of TID "3000-01-01 00:00:00"}
+\item{\code{end}}{the end of TID strptime( '01-01-3000 00:00:00', "\%d-\%m-\%Y \%H:\%M:\%S")}
 }
 \if{html}{\out{</div>}}
 }
@@ -66,7 +66,7 @@ Convert date and time to TID scale.
 \if{latex}{\out{\hypertarget{method-dateTimeToPOT}{}}}
 \subsection{Method \code{dateTimeToPOT()}}{
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{TimeClass$dateTimeToPOT(scale, date)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{TimeClass$dateTimeToPOT(date, scale)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
