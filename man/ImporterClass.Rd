@@ -2,20 +2,36 @@
 % Please edit documentation in R/dataImporterClass.R
 \name{ImporterClass}
 \alias{ImporterClass}
-\title{Class to import text files into netezza db using external table}
+\title{DSN_NAME}
 \description{
-Class to import text files into netezza db using external table
+DSN_NAME
 
-Class to import text files into netezza db using external table
+DSN_NAME
 }
 \examples{
-importer <- ImporterClass$new()
-importer$setDSN('NZSQL_M')
-importer$setTableDetails('tbl_test',finaltablecolumns=list(name=c('dggid','value'),type=c('bigint','float')),
-                         inputfilecolumns=list(name=c('id','value','dggid'),type=c('varchar(100)','varchar(100)','varchar(100)')),insert columns='CAST(dggid AS bigint),CAST(value AS float )',createTable = TRUE)
-importer$importDirectory('F:/DEM/')
-importer$importFile('F:/DEM/1.csv')
-Set DSN name for ODBC connecion
+
+## ------------------------------------------------
+## Method `ImporterClass$setDSN`
+## ------------------------------------------------
+
+
+
+## ------------------------------------------------
+## Method `ImporterClass$setExternalTableParams`
+## ------------------------------------------------
+
+
+
+## ------------------------------------------------
+## Method `ImporterClass$setTableDetails`
+## ------------------------------------------------
+
+
+
+## ------------------------------------------------
+## Method `ImporterClass$importDirectory`
+## ------------------------------------------------
+
 
 }
 \section{Methods}{
@@ -40,13 +56,21 @@ Set DSN name for ODBC connecion
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{DSN_NAME}}{DSN name
-Set external table parameters. It must be a list of key- value format. see eample
-this is existing list of params. list(name=c('SKIPROWS','QUOTEDVALUE','DELIMITER'),type=c('1',"'DOUBLE'","','"))
-use append of you want to add a set of new params into list or replace it totally}
+\item{\code{DSN_NAME}}{}
 }
 \if{html}{\out{</div>}}
 }
+\subsection{Returns}{
+
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-setExternalTableParams"></a>}}
@@ -61,11 +85,21 @@ use append of you want to add a set of new params into list or replace it totall
 \describe{
 \item{\code{params}}{list of parameters}
 
-\item{\code{append}}{wheather append parameter to existing list or replace it
-Set external table details}
+\item{\code{append}}{wheather append parameter to existing list or replace it}
 }
 \if{html}{\out{</div>}}
 }
+\subsection{Returns}{
+
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-setTableDetails"></a>}}
@@ -93,11 +127,21 @@ sasme as the following list finaltablecolumns=list(name=c('dggid','value'),type=
 
 \item{\code{insertcolumns}}{The type convertion of tables when copying from external table to distanation table. use the following example insertcolumns='CAST(dggid AS bigint),CAST(value AS float )', NOTE: the order of columns are same as @param finaltablecolumns list and column names are as @param inputfilecolumns}
 
-\item{\code{createTable}}{= FALSE If true it drops previus table if exists  and makes a new table
-import a list of files from a folder}
+\item{\code{createTable}}{= FALSE If true it drops previus table if exists  and makes a new table}
 }
 \if{html}{\out{</div>}}
 }
+\subsection{Returns}{
+
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-importDirectory"></a>}}
@@ -112,11 +156,21 @@ import a list of files from a folder}
 \describe{
 \item{\code{path}}{folder name}
 
-\item{\code{extention="*.csv"}}{file extentions in folder
-import a single file}
+\item{\code{extention}}{= "*.csv" file extentions in folder}
 }
 \if{html}{\out{</div>}}
 }
+\subsection{Returns}{
+
+}
+\subsection{Examples}{
+\if{html}{\out{<div class="r example copy">}}
+\preformatted{
+}
+\if{html}{\out{</div>}}
+
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-importFile"></a>}}
@@ -132,6 +186,9 @@ import a single file}
 \item{\code{filename}}{file name}
 }
 \if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+
 }
 }
 \if{html}{\out{<hr>}}

@@ -31,7 +31,7 @@ float, varchar, integer, bigint}
 import_to_db
 }
 \examples{
-import_to_db()
+\dontrun{import_to_db()}
 }
 \keyword{import}
 \keyword{netezza,}

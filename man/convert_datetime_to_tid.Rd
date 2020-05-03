@@ -2,8 +2,7 @@
 % Please edit documentation in R/timeClass.R
 \name{convert_datetime_to_tid}
 \alias{convert_datetime_to_tid}
-\title{convert_datetime_to_tid
-Convert date and time to TID scale.}
+\title{Title}
 \usage{
 convert_datetime_to_tid(datetime, scale)
 }
@@ -18,10 +17,10 @@ between "1000-01-01 00:00:00" and "3000-01-01 00:00:00"}
 TID in an Integer format
 }
 \description{
-convert_datetime_to_tid
-Convert date and time to TID scale.
+Title
 }
 \examples{
+\dontrun{
 convert_datetime_to_tid(strptime( '02-01-1980 00:00:00', "\%d-\%m-\%Y \%H:\%M:\%S"),'1y')
 #Another Example
 start <- as.Date("01-01-1980",format="\%d-\%m-\%Y")
@@ -38,5 +37,5 @@ while (theDate <= end)
    df <- rbind(df, data.frame(time = t, tid = tid))
    theDate <- seq.Date( theDate, length=2, by='1 years' )[2]
 }
-
+}
 }

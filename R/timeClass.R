@@ -1,7 +1,6 @@
 TimeClass <- R6Class("TimeClass",
                      public = list(
-#' setBoundLimit
-#' Define TID bounds
+
 #' @param start the begining of TID strptime( '01-01-1000 00:00:00', "%d-%m-%Y %H:%M:%S")
 #' @param end the end of TID strptime( '01-01-3000 00:00:00', "%d-%m-%Y %H:%M:%S")
 #'
@@ -72,8 +71,6 @@ TimeClass <- R6Class("TimeClass",
                          private$start=startp
                          private$end=endp
                        },
-#' dateTimeToPOT
-#' Convert date and time to TID scale.
 #' @param datetime a date and time value in string format like '2016-01-02 00:00:00'. It must be
 #' between "1000-01-01 00:00:00" and "3000-01-01 00:00:00"
 #' @param scale the scale for TID. Must be one the following items
@@ -191,9 +188,7 @@ TimeClass <- R6Class("TimeClass",
                      )
 )
 
-
-#' convert_datetime_to_tid
-#' Convert date and time to TID scale.
+#' Title
 #' @param datetime a date and time value in string format like '2016-01-02 00:00:00'. It must be
 #' between "1000-01-01 00:00:00" and "3000-01-01 00:00:00"
 #' @param scale the scale for TID. Must be one the following items
@@ -203,6 +198,7 @@ TimeClass <- R6Class("TimeClass",
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' convert_datetime_to_tid(strptime( '02-01-1980 00:00:00', "%d-%m-%Y %H:%M:%S"),'1y')
 #' #Another Example
 #' start <- as.Date("01-01-1980",format="%d-%m-%Y")
@@ -219,7 +215,7 @@ TimeClass <- R6Class("TimeClass",
 #'    df <- rbind(df, data.frame(time = t, tid = tid))
 #'    theDate <- seq.Date( theDate, length=2, by='1 years' )[2]
 #' }
-#'
+#'}
 convert_datetime_to_tid <- function(datetime,scale){
    POT<-TimeClass$new()
    POT$setBoundLimit(strptime( '01-01-1000 00:00:00', "%d-%m-%Y %H:%M:%S"),strptime( '01-01-3000 00:00:00', "%d-%m-%Y %H:%M:%S"))

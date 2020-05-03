@@ -1,27 +1,32 @@
 #library(R6)
 #library(RODBC)
-#' Class to import text files into netezza db using external table
-#' @examples
-#' importer <- ImporterClass$new()
-#' importer$setDSN('NZSQL_M')
-#' importer$setTableDetails('tbl_test',finaltablecolumns=list(name=c('dggid','value'),type=c('bigint','float')),
-#'                          inputfilecolumns=list(name=c('id','value','dggid'),type=c('varchar(100)','varchar(100)','varchar(100)')),insert columns='CAST(dggid AS bigint),CAST(value AS float )',createTable = TRUE)
-#' importer$importDirectory('F:/DEM/')
-#' importer$importFile('F:/DEM/1.csv')
+# Class to import text files into netezza db using external table
+# @examples
+
 ImporterClass <- R6::R6Class("DataImporter",
                          public = list(
                           debug = FALSE,
-                          #' Set DSN name for ODBC connecion
+
+                          #' DSN_NAME
                           #'
-                          #' @param DSN_NAME DSN name
+                          #' @param DSN_NAME
+                          #'
+                          #' @return
+                          #' @export
+                          #'
+                          #' @examples
                           setDSN = function(DSN_NAME){
                            private$odbcConnection <- odbcConnect(DSN_NAME)
                           },
-                          #' Set external table parameters. It must be a list of key- value format. see eample
-                          #'this is existing list of params. list(name=c('SKIPROWS','QUOTEDVALUE','DELIMITER'),type=c('1',"'DOUBLE'","','"))
-                          #'use append of you want to add a set of new params into list or replace it totally
+
+                          #'
                           #' @param params list of parameters
                           #' @param append wheather append parameter to existing list or replace it
+                          #'
+                          #' @return
+                          #' @export
+                          #'
+                          #' @examples
                           setExternalTableParams = function(params,append=FALSE){
 
                            if(append){
@@ -30,13 +35,20 @@ ImporterClass <- R6::R6Class("DataImporter",
                              private$externalTableParams <- params
                            }
                          },
-                         #' Set external table details
-                         #' @param tableName name of final table
-                         #' @param finaltablecolumns column list of final table. this is used to make a new table it must be a list
-                         #' sasme as the following list finaltablecolumns=list(name=c('dggid','value'),type=c('bigint','float'))
-                         #' @param inputfilecolumns column list of text files, it must be as following list  inputfilecolumns=list(name=c('id','value','dggid'),type=c('varchar(100)','varchar(100)','varchar(100)'))
-                         #' @param insertcolumns The type convertion of tables when copying from external table to distanation table. use the following example insertcolumns='CAST(dggid AS bigint),CAST(value AS float )', NOTE: the order of columns are same as @param finaltablecolumns list and column names are as @param inputfilecolumns
-                         #' @param createTable = FALSE If true it drops previus table if exists  and makes a new table
+
+
+#'
+#' @param tableName name of final table
+#' @param finaltablecolumns column list of final table. this is used to make a new table it must be a list
+#' sasme as the following list finaltablecolumns=list(name=c('dggid','value'),type=c('bigint','float'))
+#' @param inputfilecolumns column list of text files, it must be as following list  inputfilecolumns=list(name=c('id','value','dggid'),type=c('varchar(100)','varchar(100)','varchar(100)'))
+#' @param insertcolumns The type convertion of tables when copying from external table to distanation table. use the following example insertcolumns='CAST(dggid AS bigint),CAST(value AS float )', NOTE: the order of columns are same as @param finaltablecolumns list and column names are as @param inputfilecolumns
+#' @param createTable = FALSE If true it drops previus table if exists  and makes a new table
+#'
+#' @return
+#' @export
+#'
+#' @examples
                           setTableDetails = function(tableName, finaltablecolumns, inputfilecolumns, insertcolumns,
                                                     createTable = FALSE){
 
@@ -55,9 +67,15 @@ ImporterClass <- R6::R6Class("DataImporter",
                              sqlQuery(private$odbcConnection, createQuery, errors = TRUE)
                            }
                          },
-                         #' import a list of files from a folder
-                         #' @param path folder name
-                         #' @param extention="*.csv" file extentions in folder
+
+#'
+#' @param path folder name
+#' @param extention = "*.csv" file extentions in folder
+#'
+#' @return
+#' @export
+#'
+#' @examples
                           importDirectory = function(path,  extention="*.csv"){
 
                             private$file.names <- dir(path, pattern = extention)
@@ -73,8 +91,14 @@ ImporterClass <- R6::R6Class("DataImporter",
 
 
                          },
-                         #' import a single file
-                         #' @param filename file name
+
+#'
+#' @param filename file name
+#'
+#' @return
+#' @export
+#'
+#' @examples
                           importFile = function(filename){
                            logDir = dirname(file.path(filename))
 
@@ -147,7 +171,7 @@ ImporterClass <- R6::R6Class("DataImporter",
 #' @export
 #'
 #' @examples
-#' import_to_db()
+#' \dontrun{import_to_db()}
 
 import_to_db <- function(DSN,directory,table_name,value_type='varchar',createTable=T){
 
@@ -170,14 +194,4 @@ import_to_db <- function(DSN,directory,table_name,value_type='varchar',createTab
 }
 
 
-#
-#
-# importer <- ImporterClass$new()
-# importer$setDSN('NZSQL_M')
-# importer$setTableDetails('tbl_test',finaltablecolumns=list(name=c('dggid','value'),type=c('bigint','float')),
-#                          inputfilecolumns=list(name=c('id','value','dggid'),type=c('varchar(100)','varchar(100)','varchar(100)')),insertcolumns='CAST(dggid AS bigint),CAST(value AS float )',createTable = TRUE)
-#
-#
-# importer$importDirectory('F:/DEM/')
-#
-# importer$importFile('F:/DEM/1.csv')
+
