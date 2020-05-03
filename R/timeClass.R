@@ -150,7 +150,7 @@ TimeClass <- R6Class("TimeClass",
 
                            )
                            result<- pf$start + diff
-                           return(result)
+                           return(as.integer(result))
                          }
 
 
