@@ -61,7 +61,7 @@ ImporterClass <- R6::R6Class("DataImporter",
                            private$insertcolumns <- insertcolumns
 
                            if(createTable){
-                             createQuery <- paste("CREATE TABLE", tableName, " (", colList ,"); ")
+                             createQuery <- paste("CREATE TABLE", tableName, " (", colList ,") DISTRIBUTE ON (DGGID, TID)  ORGANIZE ON (DGGID, TID, KEY,VALUE); ")
                              deleteTableQuery <- paste("drop table ", tableName, " if exists;")
                              print(paste("createQuery",createQuery,"drop",deleteTableQuery))
                              sqlQuery(private$odbcConnection, deleteTableQuery, errors = TRUE)
