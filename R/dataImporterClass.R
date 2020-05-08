@@ -103,8 +103,8 @@ ImporterClass <- R6::R6Class("DataImporter",
                           importFile = function(filename){
                            logDir = dirname(file.path(filename))
 
-                           sql= 'drop table testexternaltbl1 if exists; ';
-                           sqlQuery(private$odbcConnection, sql, errors = TRUE)
+                           #sql= paste('drop table testexternaltbl1_',private$tableName,' if exists; ',sep="");
+                           #sqlQuery(private$odbcConnection, sql, errors = TRUE)
 
                            cols <- toString(unlist(do.call(Map, c(f = paste, unname( private$inputfilecolumns))), use.names = FALSE))
                            params <- paste(unlist(do.call(Map, c(f = paste, unname( private$externalTableParams ))), use.names = FALSE),collapse = " ")
@@ -118,7 +118,7 @@ ImporterClass <- R6::R6Class("DataImporter",
                            insert_sql = paste("INSERT INTO ",private$tableName," (",gsub('([[:punct:]])|\\s+',',',toString(unlist(do.call(Map, c(f = paste, unname(private$finaltablecolumns$name))), use.names = FALSE)))," ) SELECT ",private$insertcolumns," FROM testexternaltbl1_",private$tableName,";",sep="")
                            print(paste("ExternalTableSql",string))
                            print(paste("InsertSQL",insert_sql))
-                           return("ad")
+
 
 
                            sqlQuery(private$odbcConnection, string, errors = TRUE)
