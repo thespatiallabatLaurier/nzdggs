@@ -1,2 +1,0 @@
-select DGGID,  inza..ST_X(inza..st_Centroid(geom)) as x, inza..ST_Y(inza..st_Centroid(geom)) as y  from SPATIAL_SCHEMA.FINALGRID1 where
-resolution=14
