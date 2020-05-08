@@ -110,6 +110,7 @@ ImporterClass <- R6::R6Class("DataImporter",
                            params <- paste(unlist(do.call(Map, c(f = paste, unname( private$externalTableParams ))), use.names = FALSE),collapse = " ")
 
 
+                           #"VALUE","DGGID","TID","KEY"
                            string =paste("drop table externalname_",private$tableName,",testexternaltbl1_",private$tableName," if exists; create external table externalname_",private$tableName," ( ",
                                          cols ,"  ) USING (  DATAOBJECT(",paste("'",filename,"'",sep = ""),") REMOTESOURCE 'odbc' ",params," LOGDIR ",paste("'",logDir,"'",sep = "")," );create table testexternaltbl1_",private$tableName," as select * from externalname_",private$tableName,"; ",sep = "")
                            # "QUOTEDVALUE 'DOUBLE'  "
@@ -186,10 +187,10 @@ import_to_db <- function(DSN,directory,table_name,value_type='varchar',createTab
     length <-length(file_names)
     importer <- ImporterClass$new()
     importer$setDSN(DSN)
-    importer$setTableDetails(table_name,finaltablecolumns=list(name=c('dggid','value','key','tid'),type=c('bigint',value_type,'varchar(100)','integer')),
-                             inputfilecolumns=list(name=c('dggid','key','value','tid'),
+    importer$setTableDetails(table_name,finaltablecolumns=list(name=c('dggid','value','key','tid'),type=c('bigint',value_type,'varchar(100)','bigint')),
+                             inputfilecolumns=list(name=c('value','dggid','tid','key'),
                                                    type=c('varchar(100)','varchar(100)','varchar(100)','varchar(100)')),
-                             insertcolumns=paste('CAST(dggid AS bigint),CAST(value AS ',value_type,' ),key,CAST(tid as integer)',sep=""),
+                             insertcolumns=paste('CAST(dggid AS bigint),CAST(value AS ',value_type,' ),key,CAST(tid as bigint)',sep=""),
                              createTable = append)
 
 
