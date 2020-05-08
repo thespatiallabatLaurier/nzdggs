@@ -191,7 +191,7 @@ import_to_db <- function(DSN,directory,table_name,value_type='varchar',createTab
                              inputfilecolumns=list(name=c('value','dggid','tid','key'),
                                                    type=c('varchar(100)','varchar(100)','varchar(100)','varchar(100)')),
                              insertcolumns=paste('CAST(dggid AS bigint),CAST(value AS ',value_type,' ),key,CAST(tid as bigint)',sep=""),
-                             createTable = append)
+                             createTable = createTable)
 
 
     importer$importDirectory(directory)
