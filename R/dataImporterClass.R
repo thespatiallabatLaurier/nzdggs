@@ -60,7 +60,7 @@ ImporterClass <- R6::R6Class("DataImporter",
                            private$inputfilecolumns <- inputfilecolumns
                            private$insertcolumns <- insertcolumns
 
-                           if(private$createTable){
+                           if(private$createTable==T){
                              createQuery <- paste("CREATE TABLE", tableName, " (", colList ,"); ")
                              deleteTableQuery <- paste("drop table ", tableName, " if exists;")
                              print(paste("createQuery",createQuery,"drop",deleteTableQuery))
