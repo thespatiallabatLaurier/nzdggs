@@ -63,6 +63,7 @@ ImporterClass <- R6::R6Class("DataImporter",
                            if(private$createTable){
                              createQuery <- paste("CREATE TABLE", tableName, " (", colList ,"); ")
                              deleteTableQuery <- paste("drop table ", tableName, " if exists;")
+                             print(paste("createQuery",createQuery,"drop",deleteTableQuery))
                              sqlQuery(private$odbcConnection, deleteTableQuery, errors = TRUE)
                              sqlQuery(private$odbcConnection, createQuery, errors = TRUE)
                            }
@@ -78,11 +79,11 @@ ImporterClass <- R6::R6Class("DataImporter",
 #' @examples
                           importDirectory = function(path,  extention="*.csv"){
 
-                            private$file.names <- dir(path, pattern = extention)
+                            private$filenames <- dir(path, pattern = extention)
                             private$directory <- path
-                            length <-length(private$file.names)
+                            length <-length(private$filenames)
                             count = 0
-                           for (f in file.names){
+                           for (f in private$filenames){
                              count = count +1
                              print(paste(count, "of",length,"Adding File name",basename(f),sep = ""))
                              self$importFile(paste(path,basename(f),sep = "") )
@@ -110,10 +111,16 @@ ImporterClass <- R6::R6Class("DataImporter",
 
 
                            string =paste("drop table externalname_",private$tableName,",testexternaltbl1_",private$tableName," if exists; create external table externalname_",private$tableName," ( ",
-                                         cols ,"  ) USING (  DATAOBJECT(",paste("'",filename,"'",sep = ""),") REMOTESOURCE 'odbc' ",params," LOGDIR ",paste("'",logDir,"'",sep = "")," );create table testexternaltbl1_",private$tableName," as select * from externalname_",private$tableName,"; ")
+                                         cols ,"  ) USING (  DATAOBJECT(",paste("'",filename,"'",sep = ""),") REMOTESOURCE 'odbc' ",params," LOGDIR ",paste("'",logDir,"'",sep = "")," );create table testexternaltbl1_",private$tableName," as select * from externalname_",private$tableName,"; ",sep = "")
                            # "QUOTEDVALUE 'DOUBLE'  "
 
-                           # print(dggcsv_path,filename)
+
+                           insert_sql = paste("INSERT INTO ",private$tableName," (",gsub('([[:punct:]])|\\s+',',',toString(unlist(do.call(Map, c(f = paste, unname(private$finaltablecolumns$name))), use.names = FALSE)))," ) SELECT ",private$insertcolumns," FROM testexternaltbl1_",private$tableName,";",sep="")
+                           print(paste("ExternalTableSql",string))
+                           print(paste("InsertSQL",insert_sql))
+                           return("ad")
+
+
                            sqlQuery(private$odbcConnection, string, errors = TRUE)
 
                            count<-sqlQuery(private$odbcConnection,paste("select count(*) from  testexternaltbl1_",private$tableName,sep = ""), errors = TRUE)
@@ -124,7 +131,6 @@ ImporterClass <- R6::R6Class("DataImporter",
 
 
                            sqlQuery(private$odbcConnection, paste("delete FROM testexternaltbl1_",private$tableName," where dggid='DGGID'",sep=""), errors = TRUE)
-                           insert_sql = paste("INSERT INTO ",private$tableName," (",gsub('([[:punct:]])|\\s+',',',toString(unlist(do.call(Map, c(f = paste, unname(private$finaltablecolumns$name))), use.names = FALSE)))," ) SELECT ",private$insertcolumns," FROM testexternaltbl1_",private$tableName,";",sep="")
 
                            sqlQuery(private$odbcConnection, insert_sql, errors = TRUE)
 
@@ -145,7 +151,7 @@ ImporterClass <- R6::R6Class("DataImporter",
 
                          ),
                          private = list(  odbcConnection = NA,
-                                          file.names = NA,
+                                          filenames = NA,
                                           directory = NA,
                                           tableName = NA,
                                           createTable= FALSE,
