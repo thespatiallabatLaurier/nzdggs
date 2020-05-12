@@ -1,1 +1,16 @@
 language: r
+
+addons:
+  apt:
+    packages:
+    - libgdal-dev
+    - libnetcdf-dev
+
+#before_install:
+  # install dependencies of rSOILWAT2 (because rSOILWAT2 is installed 'before install' and
+  #   thus dependencies are not installed and r_packages has not taken effect yet)
+  #- Rscript -e 'utils::install.packages(c("blob", "DBI", "RSQLite"))'
+  # obtain source code of rSOILWAT2 from github
+  #- git clone -b master --single-branch --recursive https://github.com/Burke-Lauenroth-Lab/rSOILWAT2.git /tmp/rSOILWAT2
+  # install rSOILWAT2
+ # - R CMD INSTALL /tmp/rSOILWAT2
