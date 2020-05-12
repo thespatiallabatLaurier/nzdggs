@@ -164,7 +164,7 @@ ImporterClass <- R6::R6Class("DataImporter",
 
 
 
-#' import_to_db
+#' nz_import_dir_to_db
 #'
 #' @param directory Directory of CSV files
 #' @param DSN The NZ DSN
@@ -178,9 +178,9 @@ ImporterClass <- R6::R6Class("DataImporter",
 #' @export
 #'
 #' @examples
-#' \dontrun{import_to_db()}
+#' \dontrun{nz_import_dir_to_db()}
 
-import_to_db <- function(DSN,directory,table_name,value_type='varchar',createTable=T){
+nz_import_dir_to_db <- function(DSN,directory,table_name,value_type='varchar',createTable=T){
 
   if(dir.exists(file.path(directory))){
     file_names <- dir(directory, pattern = '*.csv')
@@ -198,6 +198,60 @@ import_to_db <- function(DSN,directory,table_name,value_type='varchar',createTab
   }else{
     print("Directory parameter is not valid")
   }
+}
+
+
+
+
+#' Title
+#'
+#' @param DSN
+#' @param file_path the csv file path with following format "VALUE","DGGID","TID","KEY"
+#' @param table_name
+#' @param value_type The type of Value possible options
+#' float, varchar, integer, bigint
+#' @param createTable Either make a new table and drop table if exists or make table
+#'
+#' @return
+#' @export
+#'
+#' @examples
+nz_import_file_to_db <- function(DSN,file_path,table_name,value_type='varchar',createTable=T){
+
+  if(file.exists(file.path(file_path))){
+
+    #"VALUE","DGGID","TID","KEY"
+    importer <- ImporterClass$new()
+    importer$setDSN(DSN)
+    importer$setTableDetails(table_name,finaltablecolumns=list(name=c('dggid','value','key','tid'),type=c('bigint',value_type,'varchar(100)','bigint')),
+                             inputfilecolumns=list(name=c('value','dggid','tid','key'),
+                                                   type=c('varchar(100)','varchar(100)','varchar(100)','varchar(100)')),
+                             insertcolumns=paste('CAST(dggid AS bigint),CAST(value AS ',value_type,' ),key,CAST(tid as bigint)',sep=""),
+                             createTable = createTable)
+
+
+    importer$importFile(directory)
+  }else{
+    print("Directory parameter is not valid")
+  }
+}
+
+
+#' Title
+#'
+#' @param DSN_NAME Nz DSN name
+#' @param table table name in format of   SPATIAL_SCHEMA.TESTMEE
+#'
+#' @return a sqlQuery object
+#' @export
+#'
+#' @examples
+nz_find_duplicates <- function(DSN_NAME,table){
+  odbcConnection <- odbcConnect(DSN_NAME)
+  query <- paste("SELECT DGGID, TID, VALUE, KEY, COUNT(1) AS Cnt FROM SPATIAL_DB.",table,"  GROUP BY DGGID, TID, VALUE, KEY HAVING Cnt > 1  ORDER BY Cnt DESC LIMIT 100",sep = "")
+  result<-sqlQuery(odbcConnection,query, errors = TRUE)
+  return(result)
+
 }
 
 

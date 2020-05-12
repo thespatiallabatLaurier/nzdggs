@@ -216,7 +216,7 @@ TimeClass <- R6Class("TimeClass",
 #'    theDate <- seq.Date( theDate, length=2, by='1 years' )[2]
 #' }
 #'}
-convert_datetime_to_tid <- function(datetime,scale){
+nz_convert_datetime_to_tid <- function(datetime,scale){
    POT<-TimeClass$new()
    POT$setBoundLimit(strptime( '01-01-1000 00:00:00', "%d-%m-%Y %H:%M:%S"),strptime( '01-01-3000 00:00:00', "%d-%m-%Y %H:%M:%S"))
   # # only 1y m and d works
