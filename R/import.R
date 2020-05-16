@@ -21,7 +21,7 @@ convert_raster_to_dggs_by_sampling1 <- function(path,resolution,tid){
 
 #' Title
 #'
-#' @param rasta raster object
+#' @param rasta raster object. the CRC of this file must be similar to CRS of centroids
 #' @param centroids centroids dg made by nz_make_centroids_df_from_csv function
 #' @param key key
 #' @param tid tid value
@@ -30,7 +30,7 @@ convert_raster_to_dggs_by_sampling1 <- function(path,resolution,tid){
 #' @export
 #'
 #' @examples
-nz_convert_raster_to_dggs_by_centroid <- function(rast,centroids,key,tid,outputpath='./'){
+nz_convert_raster_to_dggs_by_centroid <- function(rast,centroids,key,tid){
 
   ind=cellFromXY(rast,centroids)
   z=rast[ind]
@@ -56,7 +56,7 @@ nz_convert_raster_to_dggs_by_centroid <- function(rast,centroids,key,tid,outputp
 #'
 nz_make_centroids_df_from_csv <- function(csvpath){
 
-  df <- read.table(csvpath, header = FALSE,sep = "|",col.names=c("DGGID","X","Y"))
+  df <- read.table(csvpath, header = FALSE,sep = ",",col.names=c("DGGID","X","Y"))
   coord_matrix_x<-as.numeric(as.matrix(df$X))
   coord_matrix_y<-as.numeric(as.matrix(df$Y))
   coord2 <- cbind(coord_matrix_x, coord_matrix_y)
