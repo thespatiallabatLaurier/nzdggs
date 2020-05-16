@@ -19,6 +19,53 @@ convert_raster_to_dggs_by_sampling1 <- function(path,resolution,tid){
 }
 
 
+#' Title
+#'
+#' @param rasta raster object
+#' @param centroids centroids dg made by nz_make_centroids_df_from_csv function
+#' @param key key
+#' @param tid tid value
+#'
+#' @return a df which can be stored using   write.csv(df2,name,sep=';', row.names=FALSE,)
+#' @export
+#'
+#' @examples
+nz_convert_raster_to_dggs_by_centroid <- function(rast,centroids,key,tid,outputpath='./'){
+
+  ind=cellFromXY(rast,centroids)
+  z=rast[ind]
+  flag=(!is.na(z))
+  r=z[flag]
+  dgid=df$DGGID[flag]
+
+  df2 = data.frame(VALUE=r,DGGID=dgid,TID=rep(tid,length(dgid)),KEY=rep(key,length(dgid)))
+  #n <- paste(key,tid,sep="_")
+  #name=paste(outputpath,n,'.csv',sep="")
+  #print(name)
+  return(df2)
+}
+
+#' Title
+#'
+#' @param csvpath input csv file with the following columns "DGGID","X","Y"
+#' to reproject data you can use coord2=spTransform(coord2,CRS("+proj=laea +lon_0=0 +lat_0=90 +x_0=0 +y_0=0 +a=6378137 +rf=298.257223563"))
+#' @return
+#' @export
+#'
+#' @examples
+#'
+nz_make_centroids_df_from_csv <- function(csvpath){
+
+  df <- read.table(csvpath, header = FALSE,sep = "|",col.names=c("DGGID","X","Y"))
+  coord_matrix_x<-as.numeric(as.matrix(df$X))
+  coord_matrix_y<-as.numeric(as.matrix(df$Y))
+  coord2 <- cbind(coord_matrix_x, coord_matrix_y)
+  coord2<-as.data.frame(coord2)
+  coordinates(coord2)<-c("coord_matrix_x","coord_matrix_y")
+  crs(coord2)= "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
+  return(coord2)
+}
+
 convert_raster_to_dggs_by_sampling <- function(resolution,raster_path,tid,key){
 
   if(file.exists(raster_path)){

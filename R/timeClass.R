@@ -127,22 +127,22 @@ TimeClass <- R6Class("TimeClass",
                                      diff <- mDiff
                                    },
                                    '1y'={
-                                      diff <- floar(mDiff/(12*1))
+                                      diff <- floor(mDiff/(12*1))
                                    },
                                    '10y'={
-                                      diff <- (floar(mDiff/(12*10)))
+                                      diff <- (floor(mDiff/(12*10)))
                                    },
                                    '50y'={
-                                      diff <- (floar(mDiff/(12*50)))
+                                      diff <- (floor(mDiff/(12*50)))
                                    },
                                    '100y'={
-                                      diff <- (floar(mDiff/(12*100)))
+                                      diff <- (floor(mDiff/(12*100)))
                                    },
                                    '500y'={
-                                      diff <- (floar(mDiff/(12*500)))
+                                      diff <- (floor(mDiff/(12*500)))
                                    },
                                    '1000y'={
-                                      diff <- (floar(mDiff/(12*1000)))
+                                      diff <- (floor(mDiff/(12*1000)))
                                    }
 
                            )
