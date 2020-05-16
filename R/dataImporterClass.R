@@ -230,7 +230,7 @@ nz_import_file_to_db <- function(DSN,file_path,table_name,value_type='varchar',c
                              createTable = createTable)
 
 
-    importer$importFile(directory)
+    importer$importFile(file_path)
   }else{
     print("Directory parameter is not valid")
   }
