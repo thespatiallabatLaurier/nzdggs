@@ -5,8 +5,7 @@ Manipulate and Run Analysis on Netezza Using IDEAS Model
 # Install
 
 ```
-library(devtools)
-install_github("am2222/nzdggs")
+devtools::install_github("am2222/nzdggs")
 
 ```
 

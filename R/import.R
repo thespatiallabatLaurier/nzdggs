@@ -21,6 +21,29 @@ convert_raster_to_dggs_by_sampling1 <- function(path,resolution,tid){
 
 #' Title
 #'
+#' @param DSN_NAME NZODBC DSN name
+#' @param output_directory The output directory to store csv file (like F:\\data\\store)it should be available on the disc
+#' @param resolution the resolution of the data
+#'
+#' @return
+#' @export
+#'
+#' @examples
+nz_download_centroids_from_db <- function(DSN_NAME, output_directory,resolution){
+
+  if(dir.exists(output_directory)){
+    query <- paste("CREATE EXTERNAL TABLE '",output_directory,"\\centroids.csv' USING (	DELIMITER ','	ENCODING 'internal'	REMOTESOURCE 'ODBC'	ESCAPECHAR '\') AS select DGGID,  inza..ST_X(inza..st_Centroid(geom)) as x, inza..ST_Y(inza..st_Centroid(geom)) as y  from SPATIAL_SCHEMA.FINALGRID1 where resolution=",resolution,sep="")
+    odbcConnection <- odbcConnect(DSN_NAME)
+    sqlQuery(odbcConnection, query, errors = TRUE)
+
+  }else{
+    print("Input directory does not exist")
+  }
+
+}
+
+#' Title
+#'
 #' @param centroids centroids dg made by nz_make_centroids_df_from_csv function
 #' @param key key
 #' @param tid tid value
