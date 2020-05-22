@@ -6,7 +6,7 @@ Manipulate and Run Analysis on Netezza Using IDEAS Model
 
 #Documentations
 
-````
+```
 https://rdrr.io/github/am2222/nzdggs/
 https://nzdggs.readthedocs.io/en/latest/
 ```
