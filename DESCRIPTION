@@ -1,5 +1,5 @@
 Package: nzdggs
-Title: Manupulate and Run Analysis on Netezza Using IDEAS Model
+Title: Manipulate and Run Analysis on Netezza Using IDEAS Model
 Version: 0.0.0.9000
 Authors@R: 
     c(person(given = "Majid",
@@ -7,7 +7,7 @@ Authors@R:
            role = c("aut", "cre"),
            email = "hoja4090@mylaurier.ca",
            comment = c(ORCID = "0000-0001-7350-0055")))
-Description: Manupulate and Run Analysis on Netezza Using IDEAS Model.
+Description: Manipulate and Run Analysis on Netezza Using IDEAS Model.
 License: `use_mit_license()`
 Encoding: UTF-8
 LazyData: true
