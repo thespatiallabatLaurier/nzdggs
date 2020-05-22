@@ -2,28 +2,22 @@
 % Please edit documentation in R/import.R
 \name{nz_convert_raster_to_dggs_by_centroid}
 \alias{nz_convert_raster_to_dggs_by_centroid}
-\title{Title}
+\title{Convert Raster object to dggs by centroids}
 \usage{
-nz_convert_raster_to_dggs_by_centroid(
-  rast,
-  centroids,
-  key,
-  tid,
-  outputpath = "./"
-)
+nz_convert_raster_to_dggs_by_centroid(rast, centroids, key, tid)
 }
 \arguments{
+\item{rast}{Raster Object exported from Raster package}
+
 \item{centroids}{centroids dg made by nz_make_centroids_df_from_csv function}
 
 \item{key}{key}
 
 \item{tid}{tid value}
-
-\item{rasta}{raster object}
 }
 \value{
 a df which can be stored using   write.csv(df2,name,sep=';', row.names=FALSE,)
 }
 \description{
-Title
+Convert Raster object to dggs by centroids
 }

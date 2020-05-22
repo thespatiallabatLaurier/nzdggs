@@ -2,7 +2,7 @@
 % Please edit documentation in R/import.R
 \name{nz_make_centroids_df_from_csv}
 \alias{nz_make_centroids_df_from_csv}
-\title{Title}
+\title{Generate Centroid dataframe}
 \usage{
 nz_make_centroids_df_from_csv(csvpath)
 }
@@ -11,10 +11,11 @@ nz_make_centroids_df_from_csv(csvpath)
 to reproject data you can use coord2=spTransform(coord2,CRS("+proj=laea +lon_0=0 +lat_0=90 +x_0=0 +y_0=0 +a=6378137 +rf=298.257223563"))}
 }
 \value{
-
+an object with the df parameter which is a df object of csv and a coords parameter
+which is an spatial dataframe object
 }
 \description{
-Title
+Generate Centroid dataframe
 }
 \examples{
 

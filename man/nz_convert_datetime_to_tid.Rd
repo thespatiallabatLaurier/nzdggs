@@ -2,7 +2,7 @@
 % Please edit documentation in R/timeClass.R
 \name{nz_convert_datetime_to_tid}
 \alias{nz_convert_datetime_to_tid}
-\title{Title}
+\title{Convert Datetime To Tid}
 \usage{
 nz_convert_datetime_to_tid(datetime, scale)
 }
@@ -17,7 +17,7 @@ between "1000-01-01 00:00:00" and "3000-01-01 00:00:00"}
 TID in an Integer format
 }
 \description{
-Title
+Convert Datetime To Tid
 }
 \examples{
 \dontrun{

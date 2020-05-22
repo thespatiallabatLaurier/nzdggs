@@ -1,9 +1,9 @@
-# `nz_convert_datetime_to_tid`: Title
+# `nz_convert_datetime_to_tid`: Convert Datetime To Tid
 
 ## Description
 
 
- Title
+ Convert Datetime To Tid
 
 
 ## Usage

@@ -2,11 +2,11 @@
 % Please edit documentation in R/dataImporterClass.R
 \name{ImporterClass}
 \alias{ImporterClass}
-\title{DSN_NAME}
+\title{set DSN}
 \description{
-DSN_NAME
+set DSN
 
-DSN_NAME
+set DSN
 }
 \examples{
 
@@ -14,6 +14,7 @@ DSN_NAME
 ## Method `ImporterClass$setDSN`
 ## ------------------------------------------------
 
+set ExternalTable Params
 
 
 ## ------------------------------------------------
@@ -65,7 +66,8 @@ DSN_NAME
 }
 \subsection{Examples}{
 \if{html}{\out{<div class="r example copy">}}
-\preformatted{
+\preformatted{set ExternalTable Params
+
 }
 \if{html}{\out{</div>}}
 

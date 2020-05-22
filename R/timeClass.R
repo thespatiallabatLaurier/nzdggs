@@ -2,6 +2,7 @@ TimeClass <- R6Class("TimeClass",
                      public = list(
 
 #' @param start the begining of TID strptime( '01-01-1000 00:00:00', "%d-%m-%Y %H:%M:%S")
+#'
 #' @param end the end of TID strptime( '01-01-3000 00:00:00', "%d-%m-%Y %H:%M:%S")
 #'
 #' @return
@@ -188,7 +189,7 @@ TimeClass <- R6Class("TimeClass",
                      )
 )
 
-#' Title
+#' Convert Datetime To Tid
 #' @param datetime a date and time value in string format like '2016-01-02 00:00:00'. It must be
 #' between "1000-01-01 00:00:00" and "3000-01-01 00:00:00"
 #' @param scale the scale for TID. Must be one the following items

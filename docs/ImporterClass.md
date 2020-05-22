@@ -1,11 +1,11 @@
-# `ImporterClass`: DSN_NAME
+# `ImporterClass`: set DSN
 
 ## Description
 
 
- DSN_NAME
+ set DSN
  
- DSN_NAME
+ set DSN
 
 
 ## Examples
@@ -16,6 +16,7 @@
  ## Method `ImporterClass$setDSN`
  ## ------------------------------------------------
  
+ set ExternalTable Params
  
  
  ## ------------------------------------------------
