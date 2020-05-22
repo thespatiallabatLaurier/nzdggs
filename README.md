@@ -6,12 +6,13 @@ Manipulate and Run Analysis on Netezza Using IDEAS Model
 
 #Documentations
 
+
 ```
 https://rdrr.io/github/am2222/nzdggs/
 https://nzdggs.readthedocs.io/en/latest/
 ```
 
-# Install
+#Install
 
 ```
 devtools::install_github("am2222/nzdggs")
@@ -59,6 +60,7 @@ for (f in files) {
       value_type = "double",
       createTable = create_table
     )
+    file.remove(paste("F:\\carbon_emissions_landuse\\",name,sep=""))
     year <- year + 1
     create_table <-F
   }
@@ -70,6 +72,14 @@ for (f in files) {
 ```
 
 
+Converting a csv file of lat,lon points to DGGS data model
+
+```
+r <- read.csv('D:/Bathurst_caribou_collars.csv')
+nz_convert_points_df_to_dggs(r$Latitude,r$Latitude,10,20,r,"C:/result")
+
+```
+
 
 # Development
 ```
@@ -78,7 +88,6 @@ library("devtools")
 devtools::install_github("klutometis/roxygen")
 library(roxygen2)
 setwd("..\")
-#create("Nzdggs")
 devtools::document()
 
 
