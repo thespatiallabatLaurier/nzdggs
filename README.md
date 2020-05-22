@@ -1,10 +1,15 @@
-[![Build Status](https://travis-ci.com/am2222/nzdggs.svg?branch=master)](https://travis-ci.com/am2222/nzdggs)
-
-[![Documentation Status](https://readthedocs.org/projects/nzdggs/badge/?version=latest)](https://nzdggs.readthedocs.io/en/latest/?badge=latest)
+[![Build Status](https://travis-ci.com/am2222/nzdggs.svg?branch=master)](https://travis-ci.com/am2222/nzdggs) [![Documentation Status](https://readthedocs.org/projects/nzdggs/badge/?version=latest)](https://nzdggs.readthedocs.io/en/latest/?badge=latest)
 
 
 # Nzdggs
 Manipulate and Run Analysis on Netezza Using IDEAS Model
+
+#Documentations
+
+````
+https://rdrr.io/github/am2222/nzdggs/
+https://nzdggs.readthedocs.io/en/latest/
+```
 
 # Install
 
