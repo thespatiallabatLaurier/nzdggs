@@ -30,7 +30,7 @@ nz_convert_points_key_value_to_dggs(lat, lon, tid, res, key, value, save_in)
 Convert lat,lon, tid, key,value to a dggs data model
 }
 \examples{
-\dontrun {
+\dontrun{
 r <- read.csv('D:/Bathurst_caribou_collars.csv')
 nz_convert_points_key_value_to_dggs(r$Latitude,r$Longitude,100,10,"key",value,"C:/result")
 }

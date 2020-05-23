@@ -7,7 +7,7 @@ ImporterClass <- R6::R6Class("DataImporter",
                          public = list(
                           debug = FALSE,
 
-                          #' set DSN
+                          #'
                           #'
                           #' @param DSN_NAME
                           #'
@@ -19,7 +19,7 @@ ImporterClass <- R6::R6Class("DataImporter",
                            private$odbcConnection <- odbcConnect(DSN_NAME)
                           },
 
-                          #' set ExternalTable Params
+                          #'
                           #'
                           #' @param params list of parameters
                           #' @param append wheather append parameter to existing list or replace it

@@ -83,10 +83,10 @@ nz_convert_points_df_to_dggs <- function(lat,lon,tid,res,df,save_in){
 #' @export
 #'
 #' @examples
-#' \dontrun {
+#' \dontrun{
 #' r <- read.csv('D:/Bathurst_caribou_collars.csv')
 #' nz_convert_points_key_value_to_dggs(r$Latitude,r$Longitude,100,10,"key",value,"C:/result")
-#' }
+#'}
 nz_convert_points_key_value_to_dggs <- function(lat,lon,tid,res,key,value,save_in){
   df3 <- data.frame(value)
   colnames(df3) <- c(key)

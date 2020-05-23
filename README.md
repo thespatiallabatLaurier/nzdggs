@@ -90,5 +90,15 @@ library(roxygen2)
 setwd("..\")
 devtools::document()
 
+#makedocs documentation
+library(stringr)
+files <- dir("E:/Personal/Lab/pkg/nzdggs/man/", pattern ="*.Rd")
+
+lapply(files, function(x) {
+  outfile = paste("E:/Personal/Lab/pkg/nzdggs/docs/",str_replace(x, ".Rd", ".md"),sep = "/")
+  rdfile = paste("E:/Personal/Lab/pkg/nzdggs/man/",x,sep = "/")
+  Rd2md::Rd2markdown(rdfile = rdfile, outfile = outfile)
+  })
+
 
 ```
