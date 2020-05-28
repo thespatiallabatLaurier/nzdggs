@@ -1,8 +1,10 @@
 #library(R6)
 #library(RODBC)
-# Class to import text files into netezza db using external table
+#
 # @examples
-
+#' Data imported Class
+#' @description Class to import text files into netezza db using external table
+#'
 ImporterClass <- R6::R6Class("DataImporter",
                          public = list(
                           debug = FALSE,
@@ -80,15 +82,22 @@ ImporterClass <- R6::R6Class("DataImporter",
 #' @examples
                           importDirectory = function(path,  extention="*.csv"){
 
+
                             private$filenames <- dir(path, pattern = extention)
                             private$directory <- path
+
                             length <-length(private$filenames)
                             count = 0
                            for (f in private$filenames){
                              count = count +1
                              print(paste(count, "of",length,"Adding File name",basename(f),sep = ""))
-                             self$importFile(paste(path,basename(f),sep = "") )
-                             # print(paste(path, fsep = '\\', f, sep = ""))
+                             file_to_import <- paste(path,basename(f),sep = "")
+                             if(file.exists(file_to_import)){
+                               self$importFile(file_to_import)
+                             }else{
+                               print(paste(file_to_import,"Does not exist"))
+                             }
+
                            }
 
 
@@ -103,7 +112,7 @@ ImporterClass <- R6::R6Class("DataImporter",
 #' @examples
                           importFile = function(filename){
                            logDir = dirname(file.path(filename))
-
+                           tblname <- stringr:::str_remove(private$tableName,"[.]")
                            #sql= paste('drop table testexternaltbl1_',private$tableName,' if exists; ',sep="");
                            #sqlQuery(private$odbcConnection, sql, errors = TRUE)
 
@@ -112,12 +121,12 @@ ImporterClass <- R6::R6Class("DataImporter",
 
 
                            #"VALUE","DGGID","TID","KEY"
-                           string =paste("drop table externalname_",private$tableName,",testexternaltbl1_",private$tableName," if exists; create external table externalname_",private$tableName," ( ",
-                                         cols ,"  ) USING (  DATAOBJECT(",paste("'",filename,"'",sep = ""),") REMOTESOURCE 'odbc' ",params," LOGDIR ",paste("'",logDir,"'",sep = "")," );create table testexternaltbl1_",private$tableName," as select * from externalname_",private$tableName,"; ",sep = "")
+                           string =paste("drop table externalname_",tblname,",testexternaltbl1_",tblname," if exists; create external table externalname_",tblname," ( ",
+                                         cols ,"  ) USING (  DATAOBJECT(",paste("'",filename,"'",sep = ""),") REMOTESOURCE 'odbc' ",params," LOGDIR ",paste("'",logDir,"'",sep = "")," );create table testexternaltbl1_",tblname," as select * from externalname_",tblname,"; ",sep = "")
                            # "QUOTEDVALUE 'DOUBLE'  "
 
 
-                           insert_sql = paste("INSERT INTO ",private$tableName," (",gsub('([[:punct:]])|\\s+',',',toString(unlist(do.call(Map, c(f = paste, unname(private$finaltablecolumns$name))), use.names = FALSE)))," ) SELECT ",private$insertcolumns," FROM testexternaltbl1_",private$tableName,";",sep="")
+                           insert_sql = paste("INSERT INTO ",private$tableName," (",gsub('([[:punct:]])|\\s+',',',toString(unlist(do.call(Map, c(f = paste, unname(private$finaltablecolumns$name))), use.names = FALSE)))," ) SELECT ",private$insertcolumns," FROM testexternaltbl1_",tblname,";",sep="")
                            print(paste("ExternalTableSql",string))
                            print(paste("InsertSQL",insert_sql))
 
@@ -125,14 +134,14 @@ ImporterClass <- R6::R6Class("DataImporter",
 
                            sqlQuery(private$odbcConnection, string, errors = TRUE)
 
-                           count<-sqlQuery(private$odbcConnection,paste("select count(*) from  testexternaltbl1_",private$tableName,sep = ""), errors = TRUE)
+                           count<-sqlQuery(private$odbcConnection,paste("select count(*) from  testexternaltbl1_",tblname,sep = ""), errors = TRUE)
                            print(paste("NumberOFRecordsInExternal",count))
 
                            countTableNameBefore<-sqlQuery(private$odbcConnection, paste("select count(*) from",private$tableName), errors = TRUE)
                            print(paste("CountBefore",countTableNameBefore))
 
 
-                           sqlQuery(private$odbcConnection, paste("delete FROM testexternaltbl1_",private$tableName," where dggid='DGGID'",sep=""), errors = TRUE)
+                           sqlQuery(private$odbcConnection, paste("delete FROM testexternaltbl1_",tblname," where dggid='DGGID'",sep=""), errors = TRUE)
 
                            sqlQuery(private$odbcConnection, insert_sql, errors = TRUE)
 
@@ -142,12 +151,12 @@ ImporterClass <- R6::R6Class("DataImporter",
                              print(paste("countAfter",countTableNameAfter))
 
                            # if (debug){
-                             print(paste('log Directory is',logDir))
-                             print(paste("ExternalTableSql",string))
-                             print(paste("InsertSQL",insert_sql))
+                             #print(paste('log Directory is',logDir))
+                             #print(paste("ExternalTableSql",string))
+                             #print(paste("InsertSQL",insert_sql))
                            # }
 
-                             sqlQuery(private$odbcConnection, paste("drop table externalname_",private$tableName,",testexternaltbl1_",private$tableName," if exists;",sep = ""), errors = F)
+                             sqlQuery(private$odbcConnection, paste("drop table externalname_",tblname,",testexternaltbl1_",tblname," if exists;",sep = ""), errors = F)
 
                          }
 
@@ -165,13 +174,13 @@ ImporterClass <- R6::R6Class("DataImporter",
 
 
 
-#' nz_import_dir_to_db
-#'
+#' import directory
+#' @description Import a directory into database. The directory must have a set of csv files
 #' @param directory Directory of CSV files
-#' @param DSN The NZ DSN
+#' @param DSN The NZ DSN object made by nz_init
 #' @param value_type The type of Value possible options
 #' float, varchar, integer, bigint
-#' @param createTable Either make a new table and drop table if exists or make table
+#' @param createTable Either make a new table and drop table if exists or append data to the existing table
 #' @param table_name  Name of the table to import data into
 #'
 #' @keywords netezza, import
@@ -184,11 +193,10 @@ ImporterClass <- R6::R6Class("DataImporter",
 nz_import_dir_to_db <- function(DSN,directory,table_name,value_type='varchar',createTable=T){
 
   if(dir.exists(file.path(directory))){
-    file_names <- dir(directory, pattern = '*.csv')
-    length <-length(file_names)
+
     importer <- ImporterClass$new()
-    importer$setDSN(DSN)
-    importer$setTableDetails(table_name,finaltablecolumns=list(name=c('dggid','value','key','tid'),type=c('bigint',value_type,'varchar(100)','bigint')),
+    importer$setDSN(DSN$DSN_NAME)
+    importer$setTableDetails(paste(DSN$SCHEMA,table_name,sep="."),finaltablecolumns=list(name=c('dggid','value','key','tid'),type=c('bigint',value_type,'varchar(100)','bigint')),
                              inputfilecolumns=list(name=c('value','dggid','tid','key'),
                                                    type=c('varchar(100)','varchar(100)','varchar(100)','varchar(100)')),
                              insertcolumns=paste('CAST(dggid AS bigint),CAST(value AS ',value_type,' ),key,CAST(tid as bigint)',sep=""),
@@ -204,14 +212,14 @@ nz_import_dir_to_db <- function(DSN,directory,table_name,value_type='varchar',cr
 
 
 
-#' Title
-#'
-#' @param DSN
+#' Import a file to db
+#' @description  Import a single csv file to the netezza database. CSV columns must be as with following format "VALUE","DGGID","TID","KEY"
+#' @param DSN object extracted from nz_init function
 #' @param file_path the csv file path with following format "VALUE","DGGID","TID","KEY"
 #' @param table_name
 #' @param value_type The type of Value possible options
 #' float, varchar, integer, bigint
-#' @param createTable Either make a new table and drop table if exists or make table
+#' @param createTable Either make a new table and drop table if exists or append data to the existing table
 #'
 #' @return
 #' @export
@@ -223,8 +231,8 @@ nz_import_file_to_db <- function(DSN,file_path,table_name,value_type='varchar',c
 
     #"VALUE","DGGID","TID","KEY"
     importer <- ImporterClass$new()
-    importer$setDSN(DSN)
-    importer$setTableDetails(table_name,finaltablecolumns=list(name=c('dggid','value','key','tid'),type=c('bigint',value_type,'varchar(100)','bigint')),
+    importer$setDSN(DSN$DSN_NAME)
+    importer$setTableDetails(paste(DSN$SCHEMA,table_name,sep="."),finaltablecolumns=list(name=c('dggid','value','key','tid'),type=c('bigint',value_type,'varchar(100)','bigint')),
                              inputfilecolumns=list(name=c('value','dggid','tid','key'),
                                                    type=c('varchar(100)','varchar(100)','varchar(100)','varchar(100)')),
                              insertcolumns=paste('CAST(dggid AS bigint),CAST(value AS ',value_type,' ),key,CAST(tid as bigint)',sep=""),
@@ -238,20 +246,8 @@ nz_import_file_to_db <- function(DSN,file_path,table_name,value_type='varchar',c
 }
 
 
-#' Title
-#'
-#' @param DSN_NAME Nz DSN name
-#' @param table table name in format of   SPATIAL_SCHEMA.TESTMEE
-#'
-#' @return a sqlQuery object
-#' @export
-#'
-#' @examples
-nz_find_duplicates <- function(DSN_NAME,table){
-  odbcConnection <- odbcConnect(DSN_NAME)
-  query <- paste("SELECT DGGID, TID, VALUE, KEY, COUNT(1) AS Cnt FROM SPATIAL_DB.",table,"  GROUP BY DGGID, TID, VALUE, KEY HAVING Cnt > 1  ORDER BY Cnt DESC LIMIT 100",sep = "")
-  result<-sqlQuery(odbcConnection,query, errors = TRUE)
-  return(result)
+
+nz_remove_duplicates <- function(){
 
 }
 

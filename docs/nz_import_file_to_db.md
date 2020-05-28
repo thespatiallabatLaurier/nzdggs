@@ -1,9 +1,9 @@
-# `nz_import_file_to_db`: Title
+# `nz_import_file_to_db`: Import a file to db
 
 ## Description
 
 
- Title
+ Import a single csv file to the netezza database. CSV columns must be as with following format "VALUE","DGGID","TID","KEY"
 
 
 ## Usage
@@ -23,9 +23,10 @@ nz_import_file_to_db(
 
 Argument      |Description
 ------------- |----------------
+```DSN```     |     object extracted from nz_init function
 ```file_path```     |     the csv file path with following format "VALUE","DGGID","TID","KEY"
 ```value_type```     |     The type of Value possible options float, varchar, integer, bigint
-```createTable```     |     Either make a new table and drop table if exists or make table
+```createTable```     |     Either make a new table and drop table if exists or append data to the existing table
 
 ## Value
 

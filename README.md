@@ -80,6 +80,25 @@ nz_convert_points_df_to_dggs(r$Latitude,r$Latitude,10,20,r,"C:/result")
 
 ```
 
+Converting a Polygon shape file to DGGS datamodel using sampling. 
+
+```
+setwd('D:/UserData/PLOTS')
+zones = readOGR("ecozones.shp")
+for(i in seq(1,24)){
+  print(i)
+  z = zones[i,]
+  nz_convert_polygon_to_dggs(z,12,12,i,'D:/UserData/Majid/upload')
+}
+
+#import data to db under Admin schema
+dsn <- nz_init("NZSQL_F","ADMIN")
+
+nz_import_dir_to_db(dsn,"D:/UserData/Majid/Desktop/PLOTS/upload/","ECOZONE",'varchar(100)',T)
+
+
+```
+
 
 # Development
 ```

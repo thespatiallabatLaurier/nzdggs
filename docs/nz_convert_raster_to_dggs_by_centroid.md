@@ -1,9 +1,9 @@
-# `nz_convert_raster_to_dggs_by_centroid`: Convert Raster object to dggs by centroids
+# `nz_convert_raster_to_dggs_by_centroid`: Raster to dggs
 
 ## Description
 
 
- Convert Raster object to dggs by centroids
+ Convert Raster object to dggs by centroids. You have to save csv file by yourself.Like using which write.csv(df2,name,sep=';', row.names=FALSE,)
 
 
 ## Usage
@@ -25,6 +25,6 @@ Argument      |Description
 ## Value
 
 
- a df which can be stored using   write.csv(df2,name,sep=';', row.names=FALSE,)
+ A dataframe object
 
 

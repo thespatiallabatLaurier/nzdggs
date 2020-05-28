@@ -2,7 +2,7 @@
 % Please edit documentation in R/dataImporterClass.R
 \name{nz_import_dir_to_db}
 \alias{nz_import_dir_to_db}
-\title{nz_import_dir_to_db}
+\title{import directory}
 \usage{
 nz_import_dir_to_db(
   DSN,
@@ -13,7 +13,7 @@ nz_import_dir_to_db(
 )
 }
 \arguments{
-\item{DSN}{The NZ DSN}
+\item{DSN}{The NZ DSN object made by nz_init}
 
 \item{directory}{Directory of CSV files}
 
@@ -22,13 +22,13 @@ nz_import_dir_to_db(
 \item{value_type}{The type of Value possible options
 float, varchar, integer, bigint}
 
-\item{createTable}{Either make a new table and drop table if exists or make table}
+\item{createTable}{Either make a new table and drop table if exists or append data to the existing table}
 }
 \value{
 
 }
 \description{
-nz_import_dir_to_db
+Import a directory into database. The directory must have a set of csv files
 }
 \examples{
 \dontrun{nz_import_dir_to_db()}

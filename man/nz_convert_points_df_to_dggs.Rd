@@ -23,7 +23,7 @@ nz_convert_points_df_to_dggs(lat, lon, tid, res, df, save_in)
 Data are stored in save_in directory The csv files are per each key.
 }
 \description{
-Convert Point to DGGS
+Converts a set of x and y coordinates to DGGS data model.
 }
 \examples{
 \dontrun{

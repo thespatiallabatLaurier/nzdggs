@@ -2,7 +2,7 @@
 
 
 #' Convert Point to DGGS
-#'
+#' @description Converts a set of x and y coordinates to DGGS data model.
 #' @param lat y coordinates of the points (EPSG:4326)
 #' @param lon x coordinates of the points (EPSG:4326)
 #' @param tid TID value, A single integer for all data or a list of integer values

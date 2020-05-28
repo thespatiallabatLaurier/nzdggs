@@ -17,7 +17,7 @@ between "1000-01-01 00:00:00" and "3000-01-01 00:00:00"}
 TID in an Integer format
 }
 \description{
-Convert Datetime To Tid
+Converts a data and time object to tid. Use this function to make a datatime object \code{strptime( '02-01-1980 00:00:00', "\%d-\%m-\%Y \%H:\%M:\%S")}
 }
 \examples{
 \dontrun{

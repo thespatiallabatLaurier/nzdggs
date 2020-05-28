@@ -1,22 +1,20 @@
-# `ImporterClass`: set DSN
+# `ImporterClass`: Data imported Class
 
 ## Description
 
 
- set DSN
- 
- set DSN
+ Class to import text files into netezza db using external table
 
 
 ## Examples
 
-```r 
+```   
  
  ## ------------------------------------------------
  ## Method `ImporterClass$setDSN`
  ## ------------------------------------------------
  
- set ExternalTable Params
+ 
  
  
  ## ------------------------------------------------
@@ -36,5 +34,4 @@
  ## ------------------------------------------------
  
  
- ``` 
-
+ ```   

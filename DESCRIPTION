@@ -1,6 +1,6 @@
 Package: nzdggs
 Title: Manipulate and Run Analysis on Netezza Using IDEAS Model
-Version: 0.0.0.9000
+Version: 0.0.1.9000
 Authors@R: 
     c(person(given = "Majid",
            family = "Hojati",
@@ -21,7 +21,8 @@ Depends:
     raster,
     rgeos,
     sp,
-    dggridR
+    dggridR,
+    stringr
 Suggests:
     dplyr
 URL: https://github.com/am2222/nzdggs

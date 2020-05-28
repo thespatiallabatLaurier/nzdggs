@@ -1,9 +1,9 @@
-# `nz_make_centroids_df_from_csv`: Generate Centroid dataframe
+# `nz_make_centroids_df_from_csv`: Generate Centroids
 
 ## Description
 
 
- Generate Centroid dataframe
+ Generate Centroid dataframe from a csv file with the following columns "DGGID","X","Y"
 
 
 ## Usage
@@ -28,7 +28,6 @@ Argument      |Description
 
 ## Examples
 
-```r 
+```   
  
- ``` 
-
+ ```   

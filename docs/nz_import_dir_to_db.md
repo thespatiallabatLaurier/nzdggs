@@ -1,9 +1,9 @@
-# `nz_import_dir_to_db`: nz_import_dir_to_db
+# `nz_import_dir_to_db`: import directory
 
 ## Description
 
 
- nz_import_dir_to_db
+ Import a directory into database. The directory must have a set of csv files
 
 
 ## Usage
@@ -23,11 +23,11 @@ nz_import_dir_to_db(
 
 Argument      |Description
 ------------- |----------------
-```DSN```     |     The NZ DSN
+```DSN```     |     The NZ DSN object made by nz_init
 ```directory```     |     Directory of CSV files
 ```table_name```     |     Name of the table to import data into
 ```value_type```     |     The type of Value possible options float, varchar, integer, bigint
-```createTable```     |     Either make a new table and drop table if exists or make table
+```createTable```     |     Either make a new table and drop table if exists or append data to the existing table
 
 ## Value
 
@@ -37,7 +37,6 @@ Argument      |Description
 
 ## Examples
 
-```r 
+```   
  nz_import_dir_to_db() 
- ``` 
-
+ ```   

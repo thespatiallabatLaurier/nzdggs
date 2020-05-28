@@ -3,7 +3,7 @@
 ## Description
 
 
- Convert Datetime To Tid
+ Converts a data and time object to tid. Use this function to make a datatime object `strptime( '02-01-1980 00:00:00', "%d-%m-%Y %H:%M:%S")` 
 
 
 ## Usage
@@ -28,8 +28,7 @@ Argument      |Description
 
 ## Examples
 
-```r 
- list("\n", "convert_datetime_to_tid(strptime( '02-01-1980 00:00:00', \"%d-%m-%Y %H:%M:%S\"),'1y')\n", "#Another Example\n", "start <- as.Date(\"01-01-1980\",format=\"%d-%m-%Y\")\n", "end   <- as.Date(\"01-01-2020\",format=\"%d-%m-%Y\")\n", "\n", "theDate <- start\n", "df <- data.frame()\n", "names(df) <- c(\"time\",\"tid\")\n", "while (theDate <= end)\n", "{\n", "   t <- strptime(paste(format(theDate,\"%d-%m-%Y\"),\" 00:00:00\"), \"%d-%m-%Y %H:%M:%S\")\n", "   tid <- convert_datetime_to_tid(t, \"d\")\n", 
-    "   print(tid)\n", "   df <- rbind(df, data.frame(time = t, tid = tid))\n", "   theDate <- seq.Date( theDate, length=2, by='1 years' )[2]\n", "}\n") 
- ``` 
-
+```   
+list("", "convert_datetime_to_tid(strptime( '02-01-1980 00:00:00', \"%d-%m-%Y %H:%M:%S\"),'1y')\n", "#Another Example\n", "start <- as.Date(\"01-01-1980\",format=\"%d-%m-%Y\")\n", "end   <- as.Date(\"01-01-2020\",format=\"%d-%m-%Y\")\n", "\n", "theDate <- start\n", "df <- data.frame()\n", "names(df) <- c(\"time\",\"tid\")\n", "while (theDate <= end)\n", "{\n", "   t <- strptime(paste(format(theDate,\"%d-%m-%Y\"),\" 00:00:00\"), \"%d-%m-%Y %H:%M:%S\")\n", "   tid <- convert_datetime_to_tid(t, \"d\")\n", 
+    "   print(tid)\n", "   df <- rbind(df, data.frame(time = t, tid = tid))\n", "   theDate <- seq.Date( theDate, length=2, by='1 years' )[2]\n", "}\n")
+ ```   

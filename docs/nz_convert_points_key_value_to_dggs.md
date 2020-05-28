@@ -34,9 +34,6 @@ Argument      |Description
 
 ## Examples
 
-```r 
- {
- r <- read.csv('D:/Bathurst_caribou_collars.csv')
- nz_convert_points_key_value_to_dggs(r$Latitude,r$Longitude,100,10,"key",value,"C:/result")
- ``` 
-
+```   
+ list("\n", "r <- read.csv('D:/Bathurst_caribou_collars.csv')\n", "nz_convert_points_key_value_to_dggs(r$Latitude,r$Longitude,100,10,\"key\",value,\"C:/result\")\n") 
+ ```   

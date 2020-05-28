@@ -190,6 +190,7 @@ TimeClass <- R6Class("TimeClass",
 )
 
 #' Convert Datetime To Tid
+#' @description Converts a data and time object to tid. Use this function to make a datatime object ``strptime( '02-01-1980 00:00:00', "%d-%m-%Y %H:%M:%S")``
 #' @param datetime a date and time value in string format like '2016-01-02 00:00:00'. It must be
 #' between "1000-01-01 00:00:00" and "3000-01-01 00:00:00"
 #' @param scale the scale for TID. Must be one the following items

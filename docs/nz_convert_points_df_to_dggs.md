@@ -3,7 +3,7 @@
 ## Description
 
 
- Convert Point to DGGS
+ Converts a set of x and y coordinates to DGGS data model.
 
 
 ## Usage
@@ -32,7 +32,6 @@ Argument      |Description
 
 ## Examples
 
-```r 
+```   
  list("\n", " r <- read.csv('D:/Bathurst_caribou_collars.csv')\n", " nz_convert_points_df_to_dggs(r$Latitude,r$Latitude,10,20,r,\"C:/result\")\n") 
- ``` 
-
+ ```   

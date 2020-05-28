@@ -2,7 +2,7 @@
 % Please edit documentation in R/dataImporterClass.R
 \name{nz_import_file_to_db}
 \alias{nz_import_file_to_db}
-\title{Title}
+\title{Import a file to db}
 \usage{
 nz_import_file_to_db(
   DSN,
@@ -13,16 +13,18 @@ nz_import_file_to_db(
 )
 }
 \arguments{
+\item{DSN}{object extracted from nz_init function}
+
 \item{file_path}{the csv file path with following format "VALUE","DGGID","TID","KEY"}
 
 \item{value_type}{The type of Value possible options
 float, varchar, integer, bigint}
 
-\item{createTable}{Either make a new table and drop table if exists or make table}
+\item{createTable}{Either make a new table and drop table if exists or append data to the existing table}
 }
 \value{
 
 }
 \description{
-Title
+Import a single csv file to the netezza database. CSV columns must be as with following format "VALUE","DGGID","TID","KEY"
 }
