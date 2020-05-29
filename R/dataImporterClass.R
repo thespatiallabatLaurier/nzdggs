@@ -168,7 +168,7 @@ ImporterClass <- R6::R6Class("DataImporter",
                                           createTable= FALSE,
                                           finaltablecolumns = NA,
                                           inputfilecolumns = NA,
-                                          externalTableParams = list(name=c('SKIPROWS','QUOTEDVALUE','DELIMITER','NullValue'),type=c('1',"'DOUBLE'","','","'NA'")),
+                                          externalTableParams = list(name=c('SKIPROWS','QUOTEDVALUE','DELIMITER','NullValue','MAXERRORS'),type=c('1',"'DOUBLE'","','","'NA'",'2')),
                                           insertcolumns = NA)
 )
 
@@ -176,12 +176,14 @@ ImporterClass <- R6::R6Class("DataImporter",
 
 #' import directory
 #' @description Import a directory into database. The directory must have a set of csv files
+#'
 #' @param directory Directory of CSV files
 #' @param DSN The NZ DSN object made by nz_init
 #' @param value_type The type of Value possible options
 #' float, varchar, integer, bigint
 #' @param createTable Either make a new table and drop table if exists or append data to the existing table
 #' @param table_name  Name of the table to import data into
+#' @param max_errors The maximumn number of rows in the csv which can include error in their values
 #'
 #' @keywords netezza, import
 #' @return
@@ -190,12 +192,14 @@ ImporterClass <- R6::R6Class("DataImporter",
 #' @examples
 #' \dontrun{nz_import_dir_to_db()}
 
-nz_import_dir_to_db <- function(DSN,directory,table_name,value_type='varchar',createTable=T){
+nz_import_dir_to_db <- function(DSN,directory,table_name,value_type='varchar',createTable=T,max_errors=2){
 
   if(dir.exists(file.path(directory))){
 
     importer <- ImporterClass$new()
     importer$setDSN(DSN$DSN_NAME)
+    importer$setExternalTableParams(list(name=c('SKIPROWS','QUOTEDVALUE','DELIMITER','NullValue','MAXERRORS'),type=c('1',"'DOUBLE'","','","'NA'",max_errors)))
+
     importer$setTableDetails(paste(DSN$SCHEMA,table_name,sep="."),finaltablecolumns=list(name=c('dggid','value','key','tid'),type=c('bigint',value_type,'varchar(100)','bigint')),
                              inputfilecolumns=list(name=c('value','dggid','tid','key'),
                                                    type=c('varchar(100)','varchar(100)','varchar(100)','varchar(100)')),
@@ -214,24 +218,27 @@ nz_import_dir_to_db <- function(DSN,directory,table_name,value_type='varchar',cr
 
 #' Import a file to db
 #' @description  Import a single csv file to the netezza database. CSV columns must be as with following format "VALUE","DGGID","TID","KEY"
+#'
 #' @param DSN object extracted from nz_init function
 #' @param file_path the csv file path with following format "VALUE","DGGID","TID","KEY"
 #' @param table_name
 #' @param value_type The type of Value possible options
 #' float, varchar, integer, bigint
 #' @param createTable Either make a new table and drop table if exists or append data to the existing table
+#' @param max_errors The maximumn number of rows in the csv which can include error in their values
 #'
 #' @return
 #' @export
 #'
 #' @examples
-nz_import_file_to_db <- function(DSN,file_path,table_name,value_type='varchar',createTable=T){
+nz_import_file_to_db <- function(DSN,file_path,table_name,value_type='varchar',createTable=T,max_errors=2){
 
   if(file.exists(file.path(file_path))){
 
     #"VALUE","DGGID","TID","KEY"
     importer <- ImporterClass$new()
     importer$setDSN(DSN$DSN_NAME)
+    importer$setExternalTableParams(list(name=c('SKIPROWS','QUOTEDVALUE','DELIMITER','NullValue','MAXERRORS'),type=c('1',"'DOUBLE'","','","'NA'",max_errors)))
     importer$setTableDetails(paste(DSN$SCHEMA,table_name,sep="."),finaltablecolumns=list(name=c('dggid','value','key','tid'),type=c('bigint',value_type,'varchar(100)','bigint')),
                              inputfilecolumns=list(name=c('value','dggid','tid','key'),
                                                    type=c('varchar(100)','varchar(100)','varchar(100)','varchar(100)')),

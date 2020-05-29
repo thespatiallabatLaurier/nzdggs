@@ -30,5 +30,4 @@ Argument      |Description
 ## Examples
 
 ```   
- obj <- nz_init("NZSQL","SPATIAL_SCHEMA")
- ```   
+obj <- nz_init("NZSQL","SPATIAL_SCHEMA") ```   

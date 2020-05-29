@@ -33,5 +33,5 @@ Argument      |Description
 ## Examples
 
 ```   
- list("\n", " r <- read.csv('D:/Bathurst_caribou_collars.csv')\n", " nz_convert_points_df_to_dggs(r$Latitude,r$Latitude,10,20,r,\"C:/result\")\n") 
+list("", " r <- read.csv('D:/Bathurst_caribou_collars.csv')\n", " nz_convert_points_df_to_dggs(r$Latitude,r$Latitude,10,20,r,\"C:/result\")\n")
  ```   
