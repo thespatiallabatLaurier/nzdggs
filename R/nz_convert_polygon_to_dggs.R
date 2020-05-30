@@ -2,12 +2,15 @@
 #' Convert Polygon to DGGS
 #' @description Converts a single polygon feature to a dggs data model and stores the results as csv files.
 #' This function loops over attributes and stores each attributes data as well.
+#'
 #' @param SpatialPolygonsDataFrame a SpatialPolygonsDataFrame Object. SRC of input file must be EPSG:4326
 #' @param Resolution the resolution of DGGS. An integer value. Higher values for large polygons takes long
 #' times to run
 #' @param TID TID value, an integer value exported from nz_convert_datetim_to_tid function
 #' @param PolygonID The unique id of polygon. it is only used to store csv file with a unique name to avoid csv overwrite
-#' @param SaveIn the directory to store csv files
+#' @param SaveIn the directory to store csv files. It \strong{Must} end with /
+#' @param convertKeys Keys that are supposed to be converted. \strong{all} means converting all the
+#' keys. \strong{NA} means does not convert any keys.Use a vector of column names to only convert specific keys
 #'
 #' @return
 #' @export
@@ -37,44 +40,56 @@
 #' DSN <- nz_init("NZSQL","SPATIAL_SCHEMA")
 #' nz_import_file_to_db(DSN,"E:/home/majid/cmb/cmb.csv","mpb","double",T,max_errors= 4400)
 #' }
-nz_convert_polygon_to_dggs <- function(SpatialPolygonsDataFrame, Resolution,TID,PolygonID,SaveIn){
+nz_convert_polygon_to_dggs <- function(SpatialPolygonsDataFrame, Resolution,TID,PolygonID,SaveIn,convertKeys='all'){
 
-  dggs= dggridR::dgconstruct(res=Resolution, metric=FALSE, resround='nearest',pole_lat_deg = 37,pole_lon_deg =-178)
-  info= dggridR::dggetres(dggs)
-  sampsize=(info[Resolution+1,]$spacing_km*1e-2)*0.5
+  SaveIn <- paste(SaveIn,"/",sep = "")
+
+  dggs <- dggridR::dgconstruct(res=Resolution, metric=FALSE, resround='nearest',pole_lat_deg = 37,pole_lon_deg =-178)
+  info <- dggridR::dggetres(dggs)
+  sampsize <- (info[Resolution+1,]$spacing_km*1e-2)*0.5
 
 
-  samp_points = sp::spsample(SpatialPolygonsDataFrame, cellsize = sampsize,type="hexagonal",offset=c(0.5,0.5))
-  seqnum = dggridR::dgGEO_to_SEQNUM(dggs,samp_points@coords[,1], samp_points@coords[,2])$seqnum
-  iuseqnum=base::unique(seqnum)
+  samp_points <- sp::spsample(SpatialPolygonsDataFrame, cellsize = sampsize,type="hexagonal",offset=c(0.5,0.5))
+  seqnum <- dggridR::dgGEO_to_SEQNUM(dggs,samp_points@coords[,1], samp_points@coords[,2])$seqnum
+  iuseqnum <- base::unique(seqnum)
 
-  ring=as(SpatialPolygonsDataFrame, "SpatialLinesDataFrame")
-  n=gLength(ring)/sampsize
-  samp_points = sp::spsample(ring, n=n, type = "regular",offset=c(0.5))
-  seqnum = dggridR::dgGEO_to_SEQNUM(dggs,samp_points@coords[,1], samp_points@coords[,2])$seqnum
-  buseqnum=base::unique(seqnum)
+  ring <- as(SpatialPolygonsDataFrame, "SpatialLinesDataFrame")
+  n <- gLength(ring)/sampsize
+  samp_points <- sp::spsample(ring, n=n, type = "regular",offset=c(0.5))
+  seqnum <- dggridR::dgGEO_to_SEQNUM(dggs,samp_points@coords[,1], samp_points@coords[,2])$seqnum
+  buseqnum <- base::unique(seqnum)
 
-  dggid=c(iuseqnum,buseqnum)
-  udggid=base::unique(dggid)
+  dggid <- c(iuseqnum,buseqnum)
+  udggid <- base::unique(dggid)
   #"VALUE","DGGID","TID","KEY"
 
-  b=data.frame(VALUE=rep(0,length(udggid)),DGGID=udggid,TID=rep(TID,length(udggid)),KEY="BOUNDARY")
-  b[udggid %in% buseqnum,1]=1
+  b <- data.frame(VALUE=rep(0,length(udggid)),DGGID=udggid,TID=rep(TID,length(udggid)),KEY="BOUNDARY")
+  b[udggid %in% buseqnum,1] <- 1
 
-  print("Saving Boundary Key")
-  name=paste(SaveIn,'\\',PolygonID,'_boundary','.csv',sep="")
+  #print("Saving Boundary Key")
+  name <- paste(SaveIn,'\\',PolygonID,'_boundary','.csv',sep="")
   write.csv(b,name, row.names=FALSE)
   rm(b)
 
-  for (n in names(SpatialPolygonsDataFrame)){
-    print(paste("Saving ",n," Key"))
+  if(convertKeys == 'all'){
+    keys = names(SpatialPolygonsDataFrame)
+  }else if (is.na(convertKeys)){
+    keys  <-  c()
+  }else{
+    keys  <-  intersect(convertKeys,names(SpatialPolygonsDataFrame))
+  }
 
-    df2 = data.frame(VALUE=rep(SpatialPolygonsDataFrame[[n]],length(udggid)),DGGID=udggid,TID=rep(TID,length(udggid)),KEY=rep(n,length(udggid)))
-    name=paste(SaveIn,'\\',PolygonID,"_",n,'.csv',sep="")
+  convert_keys <- function(key) {
+
+    df2 <- data.frame(VALUE=SpatialPolygonsDataFrame[[key]],DGGID=udggid,TID=rep(TID,length(udggid)),KEY=rep(key,length(udggid)))
+    name<-paste(SaveIn,'\\',PolygonID,"_",key,'.csv',sep="")
     write.csv(df2,name, row.names=FALSE)
     rm(df2)
   }
 
-  rm(samp_points,ring,seqnum,buseqnum,udggid,dggid)
-  gc()
+  mapply(convert_keys,keys)
+
+  rm(samp_points,ring,seqnum,buseqnum,udggid,dggid,dggs)
+
+
 }

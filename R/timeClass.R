@@ -91,7 +91,7 @@ TimeClass <- R6Class("TimeClass",
                          }else{
 
                            myDate <- as.POSIXlt(date)
-                           print(myDate)
+                           #print(myDate)
                            #startu=unclass(private$start)
                            #endu=unclass(myDate)
                            mDiff = private$getElapsedMonths(myDate,private$start)
