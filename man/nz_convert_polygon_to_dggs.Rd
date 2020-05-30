@@ -9,7 +9,8 @@ nz_convert_polygon_to_dggs(
   Resolution,
   TID,
   PolygonID,
-  SaveIn
+  SaveIn,
+  convertKeys = "all"
 )
 }
 \arguments{
@@ -22,7 +23,10 @@ times to run}
 
 \item{PolygonID}{The unique id of polygon. it is only used to store csv file with a unique name to avoid csv overwrite}
 
-\item{SaveIn}{the directory to store csv files}
+\item{SaveIn}{the directory to store csv files. It \strong{Must} end with /}
+
+\item{convertKeys}{Keys that are supposed to be converted. \strong{all} means converting all the
+keys. \strong{NA} means does not convert any keys.Use a vector of column names to only convert specific keys}
 }
 \value{
 

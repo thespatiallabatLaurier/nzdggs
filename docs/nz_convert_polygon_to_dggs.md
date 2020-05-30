@@ -15,7 +15,8 @@ nz_convert_polygon_to_dggs(
   Resolution,
   TID,
   PolygonID,
-  SaveIn
+  SaveIn,
+  convertKeys = "all"
 )
 ```
 
@@ -28,7 +29,8 @@ Argument      |Description
 ```Resolution```     |     the resolution of DGGS. An integer value. Higher values for large polygons takes long times to run
 ```TID```     |     TID value, an integer value exported from nz_convert_datetim_to_tid function
 ```PolygonID```     |     The unique id of polygon. it is only used to store csv file with a unique name to avoid csv overwrite
-```SaveIn```     |     the directory to store csv files
+```SaveIn```     |     the directory to store csv files. It Must end with /
+```convertKeys```     |     Keys that are supposed to be converted. all means converting all the keys. NA means does not convert any keys.Use a vector of column names to only convert specific keys
 
 ## Value
 
