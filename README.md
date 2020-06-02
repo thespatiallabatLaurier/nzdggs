@@ -4,7 +4,7 @@
 # Nzdggs
 Manipulate and Run Analysis on Netezza Using IDEAS Model
 
-#Documentations
+# Documentations
 
 
 ```
@@ -12,14 +12,14 @@ https://rdrr.io/github/am2222/nzdggs/
 https://nzdggs.readthedocs.io/en/latest/
 ```
 
-#Install
+# Install
 
 ```
 devtools::install_github("am2222/nzdggs")
 
 ```
 
-#Examples
+# Examples
 
 Importing `.nc` files into db using centroids of resolution 9 
 
