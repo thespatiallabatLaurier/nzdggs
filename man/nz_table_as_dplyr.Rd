@@ -15,7 +15,7 @@ nz_table_as_dplyr(DSN, tableName)
 A dplyr object
 }
 \description{
-Netezza Table To dplyr
+Converts a Netezza table to a dplyr object.
 }
 \examples{
 \dontrun{

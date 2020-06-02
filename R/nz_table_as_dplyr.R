@@ -1,6 +1,7 @@
 
 #' Netezza Table To dplyr
 #'
+#' @description Converts a Netezza table to a dplyr object.
 #' @param DSN DSN object extracted from nz_init function
 #' @param tableName the name of the table to read
 #'

@@ -1,9 +1,9 @@
-# `nz_dplyr_to_netezza`: Save a dplyr object as netezza table
+# `nz_dplyr_to_netezza`: dplyr to Netezza table
 
 ## Description
 
 
- Save a dplyr object as netezza table
+ Save a dplyr object as netezza table. It can drop table when it already exists.
 
 
 ## Usage
@@ -20,7 +20,7 @@ Argument      |Description
 ```DSN```     |     A DSN object exported from nz_init function
 ```dplyr```     |     a dplyr object
 ```outputTable```     |     name of the output table to store data
-```dropIfExist```     |     Drop if the outputTable does exist. Default is False. Use it with cautous since it removes data in the existing outputTable permanently
+```dropIfExist```     |     Drop if the outputTable does exist. Default is False. Use it with cautious since it removes data in the existing outputTable permanently
 
 ## Value
 

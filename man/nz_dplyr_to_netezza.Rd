@@ -2,7 +2,7 @@
 % Please edit documentation in R/nz_dplyr_to_netezza.R
 \name{nz_dplyr_to_netezza}
 \alias{nz_dplyr_to_netezza}
-\title{Save a dplyr object as netezza table}
+\title{dplyr to Netezza table}
 \usage{
 nz_dplyr_to_netezza(DSN, dplyr, outputTable, dropIfExist = F)
 }
@@ -13,14 +13,14 @@ nz_dplyr_to_netezza(DSN, dplyr, outputTable, dropIfExist = F)
 
 \item{outputTable}{name of the output table to store data}
 
-\item{dropIfExist}{Drop if the outputTable does exist. Default is False. Use it with cautous since it removes
+\item{dropIfExist}{Drop if the outputTable does exist. Default is False. Use it with cautious since it removes
 data in the existing outputTable permanently}
 }
 \value{
 A dplyr object from outputTable
 }
 \description{
-Save a dplyr object as netezza table
+Save a dplyr object as netezza table. It can drop table when it already exists.
 }
 \examples{
 \dontrun{

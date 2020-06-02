@@ -3,7 +3,7 @@
 ## Description
 
 
- Netezza Table To dplyr
+ Converts a Netezza table to a dplyr object.
 
 
 ## Usage
