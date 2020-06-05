@@ -14,7 +14,7 @@ https://nzdggs.readthedocs.io/en/latest/
 
 # Install
 
-```
+```r
 devtools::install_github("am2222/nzdggs")
 
 ```
@@ -23,7 +23,7 @@ devtools::install_github("am2222/nzdggs")
 
 Importing `.nc` files into db using centroids of resolution 9 
 
-```
+```r
 library(rgdal)
 library(raster)
 library(rgeos)
@@ -74,7 +74,7 @@ for (f in files) {
 
 Converting a csv file of lat,lon points to DGGS data model
 
-```
+```r
 r <- read.csv('D:/Bathurst_caribou_collars.csv')
 nz_convert_points_df_to_dggs(r$Latitude,r$Latitude,10,20,r,"C:/result")
 
@@ -82,7 +82,7 @@ nz_convert_points_df_to_dggs(r$Latitude,r$Latitude,10,20,r,"C:/result")
 
 Converting a Polygon shape file to DGGS datamodel using sampling. 
 
-```
+```r
 setwd('D:/UserData/PLOTS')
 zones = readOGR("ecozones.shp")
 for(i in seq(1,24)){
@@ -118,7 +118,8 @@ nz_import_file_to_db(DSN,"E:/home/crobertson/cmb/cmb.csv","mpb","double",T,max_e
 ```
 
 Converting and importing a csv to the netezza
-``
+
+```r
 #Assume we have a csv file with following columns. X,DGGID,EVENT (two keys)
 csv<-read.csv2("mpb-ev.csv",sep=",")
 head(csv)
@@ -143,7 +144,7 @@ write.csv(df2,row.names = F,"import//id.csv",sep=",")
 DSN <- nz_init("NZSQL","SCHEMA")
 #impord data from folder to the database. The key type is varchar(100) for multiple keys.
 nz_import_dir_to_db(DSN,"/home/[user]/import/","mbpev","varchar(100)")
-``
+```
 
 
 
