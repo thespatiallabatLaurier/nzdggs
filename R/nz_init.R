@@ -10,6 +10,8 @@
 #' @examples
 #' obj <- nz_init("NZSQL","SPATIAL_SCHEMA")
 nz_init <- function(DSN_NAME,SCHEMA){
+  Sys.setenv(ODBCINI="/usr/local/etc/odbc.ini")
+  Sys.setenv(NZ_ODBC_INI_PATH="/usr/local/etc/")
   list <- list(DSN_NAME=DSN_NAME,SCHEMA=SCHEMA)
   return(list)
 }
