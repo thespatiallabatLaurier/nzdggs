@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>`nz_make_centroids_df_from_csv`: Generate Centroids - nzdggs documentations</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "`nz_make_centroids_df_from_csv`: Generate Centroids";
+    var mkdocs_page_input_path = "Api\\nz_make_centroids_df_from_csv.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> nzdggs documentations</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">NZDGGS</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Api</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../ImporterClass/">`ImporterClass`: Data imported Class</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../nz_convert_datetime_to_tid/">`nz_convert_datetime_to_tid`: Convert Datetime To Tid</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../nz_convert_df_to_dggs/">`nz_convert_df_to_dggs`: dataframe to dggs</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../nz_convert_points_df_to_dggs/">`nz_convert_points_df_to_dggs`: Convert Point to DGGS</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../nz_convert_points_key_value_to_dggs/">`nz_convert_points_key_value_to_dggs`: Convert lat,lon, tid, key,value to a dggs data model</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../nz_convert_polygon_to_dggs/">`nz_convert_polygon_to_dggs`: Convert Polygon to DGGS</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../nz_convert_raster_to_dggs_by_centroid/">`nz_convert_raster_to_dggs_by_centroid`: Raster to dggs</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../nz_dplyr_to_netezza/">`nz_dplyr_to_netezza`: dplyr to Netezza table</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../nz_export_centroids_from_db/">`nz_export_centroids_from_db`: Export centroids</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../nz_find_duplicates/">`nz_find_duplicates`: Find duplicates</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../nz_import_dir_to_db/">`nz_import_dir_to_db`: import directory</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../nz_import_file_to_db/">`nz_import_file_to_db`: Import a file to db</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../nz_init/">`nz_init`: make nz db object</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">`nz_make_centroids_df_from_csv`: Generate Centroids</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#description">Description</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#arguments">Arguments</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#value">Value</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a>
+    </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../nz_table_as_dplyr/">`nz_table_as_dplyr`: Netezza Table To dplyr</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Examples</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Examples/GettingStarted/">NZDGGS</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">Import Data</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../Examples/Import%20Data/convert_csv_to_dggs/">Convert csv to dggs</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../Examples/Import%20Data/convert_polygon_to_dggs/">Convert polygon to dggs</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../Examples/Import%20Data/import_nc_file/">Import nc file</a>
+                </li>
+    </ul>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">nzdggs documentations</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Api &raquo;</li>
+        
+      
+    
+    <li>`nz_make_centroids_df_from_csv`: Generate Centroids</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="nz_make_centroids_df_from_csv-generate-centroids"><code>nz_make_centroids_df_from_csv</code>: Generate Centroids</h1>
+<h2 id="description">Description</h2>
+<p>Generate Centroid dataframe from a csv file with the following columns "DGGID","X","Y"</p>
+<h2 id="usage">Usage</h2>
+<pre><code class="r">nz_make_centroids_df_from_csv(csvpath)
+</code></pre>
+
+<h2 id="arguments">Arguments</h2>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>csvpath</code></td>
+<td>input csv file with the following columns "DGGID","X","Y" to reproject data you can use coord2=spTransform(coord2,CRS("+proj=laea +lon_0=0 +lat_0=90 +x_0=0 +y_0=0 +a=6378137 +rf=298.257223563"))</td>
+</tr>
+</tbody>
+</table>
+<h2 id="value">Value</h2>
+<p>an object with the df parameter which is a df object of csv and a coords parameter
+ which is an spatial dataframe object</p>
+<h2 id="examples">Examples</h2>
+<p><code></code>   </p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../nz_table_as_dplyr/" class="btn btn-neutral float-right" title="`nz_table_as_dplyr`: Netezza Table To dplyr">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../nz_init/" class="btn btn-neutral" title="`nz_init`: make nz db object"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../nz_init/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../nz_table_as_dplyr/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
