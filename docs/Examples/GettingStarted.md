@@ -37,4 +37,4 @@ plot(poly['AVGT'])
 
 head(data)
 ```
-![Output Plot](Rplot1.png”)
+![Output Plot]("Rplot1.png")
