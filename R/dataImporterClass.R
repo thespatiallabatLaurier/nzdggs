@@ -192,7 +192,7 @@ ImporterClass <- R6::R6Class("DataImporter",
 #' @examples
 #' \dontrun{nz_import_dir_to_db()}
 
-nz_import_dir_to_db <- function(DSN,directory,table_name,value_type='varchar',createTable=T,max_errors=2){
+nz_import_dir_to_db <- function(DSN,directory,table_name,value_type='varchar(100)',createTable=T,max_errors=2){
 
   if(dir.exists(file.path(directory))){
 
@@ -231,7 +231,7 @@ nz_import_dir_to_db <- function(DSN,directory,table_name,value_type='varchar',cr
 #' @export
 #'
 #' @examples
-nz_import_file_to_db <- function(DSN,file_path,table_name,value_type='varchar',createTable=T,max_errors=2){
+nz_import_file_to_db <- function(DSN,file_path,table_name,value_type='varchar(100)',createTable=T,max_errors=2){
 
   if(file.exists(file.path(file_path))){
 
