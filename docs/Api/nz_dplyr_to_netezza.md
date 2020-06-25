@@ -30,6 +30,10 @@ Argument      |Description
 
 ## Examples
 
-```   
-list("", "DSN <- nz_init(\"NZSQL_F\",\"ADMIN\")\n", "mbp <- nz_table_as_dplyr(DSN,\"MPB\")\n", "head(mbp)\n", "mbp2 <- nz_dplyr_to_netezza(DSN,mbp,\"mbp2\")\n", "head(mbp2)\n")
- ```   
+```r
+DSN <- nz_init("NZSQL","ADMIN")
+mbp <- nz_table_as_dplyr(DSN,"MPB")
+head(mbp)
+mbp2 <- nz_dplyr_to_netezza(DSN,mbp,"mbp2")
+head(mbp2)
+```r

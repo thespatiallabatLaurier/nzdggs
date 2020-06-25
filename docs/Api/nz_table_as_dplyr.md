@@ -28,7 +28,9 @@ Argument      |Description
 
 ## Examples
 
-```   
-list("", "DSN <- nz_init(\"NZSQL_F\",\"ADMIN\")\n", "mbp <- nz_table_as_dplyr(DSN,\"MPB\")\n", "head(mbp)\n")
+```r
+DSN <- nz_init("NZSQL_F","ADMIN")
+mbp <- nz_table_as_dplyr(DSN,"MPB")
+head(mbp)
 
- ```   
+```

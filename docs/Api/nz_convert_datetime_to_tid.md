@@ -28,7 +28,18 @@ Argument      |Description
 
 ## Examples
 
-```   
-list("", "convert_datetime_to_tid(strptime( '02-01-1980 00:00:00', \"%d-%m-%Y %H:%M:%S\"),'1y')\n", "#Another Example\n", "start <- as.Date(\"01-01-1980\",format=\"%d-%m-%Y\")\n", "end   <- as.Date(\"01-01-2020\",format=\"%d-%m-%Y\")\n", "\n", "theDate <- start\n", "df <- data.frame()\n", "names(df) <- c(\"time\",\"tid\")\n", "while (theDate <= end)\n", "{\n", "   t <- strptime(paste(format(theDate,\"%d-%m-%Y\"),\" 00:00:00\"), \"%d-%m-%Y %H:%M:%S\")\n", "   tid <- convert_datetime_to_tid(t, \"d\")\n", 
-    "   print(tid)\n", "   df <- rbind(df, data.frame(time = t, tid = tid))\n", "   theDate <- seq.Date( theDate, length=2, by='1 years' )[2]\n", "}\n")
- ```   
+```r
+convert_datetime_to_tid(strptime( '02-01-1980 00:00:00', "%d-%m-%Y %H:%M:%S"),'1y')
+#Another Example
+start <- as.Date("01-01-1980",format="%d-%m-%Y")
+end   <- as.Date("01-01-2020",format="%d-%m-%Y")
+theDate <- startdf <- data.frame()names(df) <- c("time","tid") 
+while (theDate <= end) {   
+    t <- strptime(paste(format(theDate,"%d-%m-%Y")," 00:00:00"), "%d-%m-%Y %H:%M:%S")    
+    tid <- convert_datetime_to_tid(t, "d") 
+    print(tid)    
+    df <- rbind(df, data.frame(time = t, tid = tid))    
+    theDate <- seq.Date( theDate, length=2, by='1 years' )[2] 
+}
+
+```

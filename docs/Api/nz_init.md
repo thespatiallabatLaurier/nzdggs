@@ -29,5 +29,6 @@ Argument      |Description
 
 ## Examples
 
-```   
-obj <- nz_init("NZSQL","SPATIAL_SCHEMA") ```   
+```r  
+obj <- nz_init("NZSQL","SPATIAL_SCHEMA") 
+```
