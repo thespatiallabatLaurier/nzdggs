@@ -5,13 +5,6 @@
 # Nzdggs
 Manipulate and Run Analysis on Netezza Using IDEAS Model
 
-# Documentations
-
-
-```
-
-https://nzdggs.readthedocs.io/en/latest/
-```
 
 # Install
 
@@ -21,13 +14,20 @@ devtools::install_github("am2222/nzdggs")
 ```
 
 # Examples
-
  
 - [Getting Started](https://am2222.github.io/nzdggs/Examples/GettingStarted/)
 - [Convert and Importing Data](https://am2222.github.io/nzdggs/Examples/ImportData/convert_csv_to_dggs/)
 - [Polygon To DGGS](https://am2222.github.io/nzdggs/Examples/ImportData/convert_polygon_to_dggs/)
 - [.Nc to DGGS](https://am2222.github.io/nzdggs/Examples/ImportData/import_nc_file/)
 - [API](https://am2222.github.io/nzdggs/)
+
+
+# Documentations
+
+```
+https://nzdggs.readthedocs.io/en/latest/
+```
+
 
 # Development
 ```
