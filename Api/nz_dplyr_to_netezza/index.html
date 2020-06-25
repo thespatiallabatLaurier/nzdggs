@@ -177,8 +177,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../.." title="NZDGGS" class="md-nav__link">
-      NZDGGS
+    <a href="../.." title="Installing" class="md-nav__link">
+      Installing
     </a>
   </li>
 
@@ -690,7 +690,12 @@
 <h2 id="value">Value</h2>
 <p>A dplyr object from outputTable</p>
 <h2 id="examples">Examples</h2>
-<p><code>list("", "DSN &lt;- nz_init(\"NZSQL_F\",\"ADMIN\")\n", "mbp &lt;- nz_table_as_dplyr(DSN,\"MPB\")\n", "head(mbp)\n", "mbp2 &lt;- nz_dplyr_to_netezza(DSN,mbp,\"mbp2\")\n", "head(mbp2)\n")</code>   </p>
+<p><code>r
+DSN &lt;- nz_init("NZSQL","ADMIN")
+mbp &lt;- nz_table_as_dplyr(DSN,"MPB")
+head(mbp)
+mbp2 &lt;- nz_dplyr_to_netezza(DSN,mbp,"mbp2")
+head(mbp2)</code>r</p>
                 
                   
                     
@@ -699,7 +704,7 @@
 <div class="md-source-date">
   <small>
     
-      Last update: June 24, 2020
+      Last update: June 25, 2020
     
   </small>
 </div>

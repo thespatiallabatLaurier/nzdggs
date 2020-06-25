@@ -177,8 +177,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../.." title="NZDGGS" class="md-nav__link">
-      NZDGGS
+    <a href="../.." title="Installing" class="md-nav__link">
+      Installing
     </a>
   </li>
 
@@ -682,8 +682,19 @@
 <h2 id="value">Value</h2>
 <p>TID in an Integer format</p>
 <h2 id="examples">Examples</h2>
-<p><code>list("", "convert_datetime_to_tid(strptime( '02-01-1980 00:00:00', \"%d-%m-%Y %H:%M:%S\"),'1y')\n", "#Another Example\n", "start &lt;- as.Date(\"01-01-1980\",format=\"%d-%m-%Y\")\n", "end   &lt;- as.Date(\"01-01-2020\",format=\"%d-%m-%Y\")\n", "\n", "theDate &lt;- start\n", "df &lt;- data.frame()\n", "names(df) &lt;- c(\"time\",\"tid\")\n", "while (theDate &lt;= end)\n", "{\n", "   t &lt;- strptime(paste(format(theDate,\"%d-%m-%Y\"),\" 00:00:00\"), \"%d-%m-%Y %H:%M:%S\")\n", "   tid &lt;- convert_datetime_to_tid(t, \"d\")\n", 
-    "   print(tid)\n", "   df &lt;- rbind(df, data.frame(time = t, tid = tid))\n", "   theDate &lt;- seq.Date( theDate, length=2, by='1 years' )[2]\n", "}\n")</code>   </p>
+<div class="highlight"><pre><span></span><code><span class="nf">convert_datetime_to_tid</span><span class="p">(</span><span class="nf">strptime</span><span class="p">(</span> <span class="s">&#39;02-01-1980 00:00:00&#39;</span><span class="p">,</span> <span class="s">&quot;%d-%m-%Y %H:%M:%S&quot;</span><span class="p">),</span><span class="s">&#39;1y&#39;</span><span class="p">)</span>
+<span class="c1">#Another Example</span>
+<span class="n">start</span> <span class="o">&lt;-</span> <span class="nf">as.Date</span><span class="p">(</span><span class="s">&quot;01-01-1980&quot;</span><span class="p">,</span><span class="n">format</span><span class="o">=</span><span class="s">&quot;%d-%m-%Y&quot;</span><span class="p">)</span>
+<span class="n">end</span>   <span class="o">&lt;-</span> <span class="nf">as.Date</span><span class="p">(</span><span class="s">&quot;01-01-2020&quot;</span><span class="p">,</span><span class="n">format</span><span class="o">=</span><span class="s">&quot;%d-%m-%Y&quot;</span><span class="p">)</span>
+<span class="n">theDate</span> <span class="o">&lt;-</span> <span class="n">startdf</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">()</span><span class="nf">names</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;time&quot;</span><span class="p">,</span><span class="s">&quot;tid&quot;</span><span class="p">)</span> 
+<span class="nf">while </span><span class="p">(</span><span class="n">theDate</span> <span class="o">&lt;=</span> <span class="n">end</span><span class="p">)</span> <span class="p">{</span>   
+    <span class="n">t</span> <span class="o">&lt;-</span> <span class="nf">strptime</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="nf">format</span><span class="p">(</span><span class="n">theDate</span><span class="p">,</span><span class="s">&quot;%d-%m-%Y&quot;</span><span class="p">),</span><span class="s">&quot; 00:00:00&quot;</span><span class="p">),</span> <span class="s">&quot;%d-%m-%Y %H:%M:%S&quot;</span><span class="p">)</span>    
+    <span class="n">tid</span> <span class="o">&lt;-</span> <span class="nf">convert_datetime_to_tid</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s">&quot;d&quot;</span><span class="p">)</span> 
+    <span class="nf">print</span><span class="p">(</span><span class="n">tid</span><span class="p">)</span>    
+    <span class="n">df</span> <span class="o">&lt;-</span> <span class="nf">rbind</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">time</span> <span class="o">=</span> <span class="n">t</span><span class="p">,</span> <span class="n">tid</span> <span class="o">=</span> <span class="n">tid</span><span class="p">))</span>    
+    <span class="n">theDate</span> <span class="o">&lt;-</span> <span class="nf">seq.Date</span><span class="p">(</span> <span class="n">theDate</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="s">&#39;1 years&#39;</span> <span class="p">)[</span><span class="m">2</span><span class="p">]</span> 
+<span class="p">}</span>
+</code></pre></div>
                 
                   
                     
@@ -692,7 +703,7 @@
 <div class="md-source-date">
   <small>
     
-      Last update: June 24, 2020
+      Last update: June 25, 2020
     
   </small>
 </div>

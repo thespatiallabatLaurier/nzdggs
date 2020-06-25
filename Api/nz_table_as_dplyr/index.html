@@ -177,8 +177,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../.." title="NZDGGS" class="md-nav__link">
-      NZDGGS
+    <a href="../.." title="Installing" class="md-nav__link">
+      Installing
     </a>
   </li>
 
@@ -682,9 +682,10 @@
 <h2 id="value">Value</h2>
 <p>A dplyr object</p>
 <h2 id="examples">Examples</h2>
-<p>``` <br />
-list("", "DSN &lt;- nz_init(\"NZSQL_F\",\"ADMIN\")\n", "mbp &lt;- nz_table_as_dplyr(DSN,\"MPB\")\n", "head(mbp)\n")</p>
-<p>```   </p>
+<div class="highlight"><pre><span></span><code><span class="n">DSN</span> <span class="o">&lt;-</span> <span class="nf">nz_init</span><span class="p">(</span><span class="s">&quot;NZSQL_F&quot;</span><span class="p">,</span><span class="s">&quot;ADMIN&quot;</span><span class="p">)</span>
+<span class="n">mbp</span> <span class="o">&lt;-</span> <span class="nf">nz_table_as_dplyr</span><span class="p">(</span><span class="n">DSN</span><span class="p">,</span><span class="s">&quot;MPB&quot;</span><span class="p">)</span>
+<span class="nf">head</span><span class="p">(</span><span class="n">mbp</span><span class="p">)</span>
+</code></pre></div>
                 
                   
                     
@@ -693,7 +694,7 @@ list("", "DSN &lt;- nz_init(\"NZSQL_F\",\"ADMIN\")\n", "mbp &lt;- nz_table_as_dp
 <div class="md-source-date">
   <small>
     
-      Last update: June 24, 2020
+      Last update: June 25, 2020
     
   </small>
 </div>

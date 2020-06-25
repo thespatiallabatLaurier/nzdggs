@@ -177,8 +177,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../.." title="NZDGGS" class="md-nav__link">
-      NZDGGS
+    <a href="../.." title="Installing" class="md-nav__link">
+      Installing
     </a>
   </li>
 
@@ -705,8 +705,36 @@
 </table>
 <h2 id="value">Value</h2>
 <h2 id="examples">Examples</h2>
-<p><code>list("", "zones = readOGR(\"ecozones.shp\")\n", "for(i in seq(1,length(zones))){\n", "  print(i)\n", "  z = zones[i,]\n", "  nz_convert_polygon_to_dggs(z,1,12,i,'D:/UserData/Majid/Desktop/PLOTS/')\n", "}\n", "library(\"nzdggs\")\n", "library(\"stampr\")\n", "data(mpb)\n", "mpb$dt &lt;- Sys.Date()\n", "mpb$YR &lt;- mpb$TGROUP+1996\n", "mpb$dt &lt;- as.Date(paste(mpb$YR, '-01-01', sep=\"\"), \"%Y-%m-%d\")\n", "mpb$tid &lt;- nz_convert_datetime_to_tid(mpb$dt, '1y')\n", "proj4string(mpb) &lt;- '+proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 +lon_0=-126 +x_0=1000000 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m +no_defs'\n", 
-    "mpb &lt;- spTransform(mpb, CRS(\"+init=epsg:4326\"))\n", "mpb &lt;- mpb[,c(1,6)]\n", "for(i in seq(1,length(mpb))){\n", "  z = mpb[i,]\n", "  nz_convert_polygon_to_dggs(z,20,z$tid,z$ID,\"E:\\\\home\\\\crobertson\\\\\")\n", "}\n", "\n", "DSN &lt;- nz_init(\"NZSQL\",\"SPATIAL_SCHEMA\")\n", "nz_import_file_to_db(DSN,\"E:/home/majid/cmb/cmb.csv\",\"mpb\",\"double\",T,max_errors= 4400)\n")</code>   </p>
+<p>```r
+zones = readOGR("ecozones.shp")\n", "for(i in seq(1,length(zones)))
+i= 1</p>
+<p>print(i)
+  z = zones[i,]
+  nz_convert_polygon_to_dggs(z,1,12,i,'D:/UserData/Majid/Desktop/PLOTS/')</p>
+<p>library("nzdggs")
+  library("stampr")
+  data(mpb)
+  mpb<span><span class="MathJax_Preview">dt &lt;- Sys.Date()\n", "mpb</span><script type="math/tex">dt <- Sys.Date()\n", "mpb</script></span>YR &lt;- mpb<span><span class="MathJax_Preview">TGROUP+1996
+  mpb</span><script type="math/tex">TGROUP+1996
+  mpb</script></span>dt &lt;- as.Date(paste(mpb<span><span class="MathJax_Preview">YR, '-01-01', sep=""), "%Y-%m-%d")
+  mpb</span><script type="math/tex">YR, '-01-01', sep=""), "%Y-%m-%d")
+  mpb</script></span>tid &lt;- nz_convert_datetime_to_tid(mpb<span><span class="MathJax_Preview">dt, '1y')
+  proj4string(mpb) &lt;- '+proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 +lon_0=-126 +x_0=1000000 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m +no_defs'
+  mpb &lt;- spTransform(mpb, CRS("+init=epsg:4326")
+  mpb &lt;- mpb[,c(1,6)]
+  for(i in seq(1,length(mpb))){
+  z = mpb[i,]
+    nz_convert_polygon_to_dggs(z,20,z</span><script type="math/tex">dt, '1y')
+  proj4string(mpb) <- '+proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 +lon_0=-126 +x_0=1000000 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m +no_defs'
+  mpb <- spTransform(mpb, CRS("+init=epsg:4326")
+  mpb <- mpb[,c(1,6)]
+  for(i in seq(1,length(mpb))){
+  z = mpb[i,]
+    nz_convert_polygon_to_dggs(z,20,z</script></span>tid,z$ID,"E:\\home\\crobertson\\")
+  }</p>
+<p>DSN &lt;- nz_init("NZSQL","SPATIAL_SCHEMA")
+  nz_import_file_to_db(DSN,"E:/home/majid/cmb/cmb.csv","mpb","double",T,max_errors= 4400)
+ ```</p>
                 
                   
                     
@@ -715,7 +743,7 @@
 <div class="md-source-date">
   <small>
     
-      Last update: June 24, 2020
+      Last update: June 25, 2020
     
   </small>
 </div>
