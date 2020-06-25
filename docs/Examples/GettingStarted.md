@@ -1,4 +1,4 @@
-# NZDGGS
+# Getting Started
 
 In this example we try to connect to the `Netezza` and use `IDEAS` data model to perform a few simple analytics queries.
 

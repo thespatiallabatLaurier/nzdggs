@@ -1,13 +1,13 @@
+# Convert and Importing Data
+
 Converting a csv file of lat,lon points to DGGS data model
 ```r
 r <- read.csv('D:/Bathurst_caribou_collars.csv')
 nz_convert_points_df_to_dggs(r$Latitude,r$Latitude,10,20,r,"C:/result")
 ```
 
-# Another Example
+# Lat/Lon To DGGS
 Converting and importing a csv to the netezza
-
-
 
 ```r
 #Assume we have a csv file with following columns. X,DGGID,EVENT (two keys)

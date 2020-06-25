@@ -156,7 +156,7 @@ devtools::install_github("klutometis/roxygen")
 library(roxygen2)
 setwd("..\")
 devtools::document()
-
+mkdocs gh-deploy
 #makedocs documentation
 library(stringr)
 files <- dir("E:/Personal/Lab/pkg/nzdggs/man/", pattern ="*.Rd")
