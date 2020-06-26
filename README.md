@@ -37,7 +37,6 @@ devtools::install_github("klutometis/roxygen")
 library(roxygen2)
 setwd("..\")
 devtools::document()
-mkdocs gh-deploy  -f ./mkdocs_material.yml
 #makedocs documentation
 library(stringr)
 files <- dir("E:/Personal/Lab/pkg/nzdggs/man/", pattern ="*.Rd")
@@ -48,5 +47,5 @@ lapply(files, function(x) {
   Rd2md::Rd2markdown(rdfile = rdfile, outfile = outfile)
   })
 
-
+mkdocs gh-deploy -c -f ./mkdocs_material.yml
 ```
