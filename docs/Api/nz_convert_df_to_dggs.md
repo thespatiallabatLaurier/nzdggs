@@ -33,8 +33,11 @@ Argument      |Description
 ## Examples
 
 ```r
-csv<-read.csv2("D:\\UserData\\Majid\\Downloads\\mpb-ev.csv",sep=",")\ $\nhead(csv)\ 
-nz_convert_df_to_dggs(csv$DGGID,-1,csv,"E:\\home\\crobertson")\ 
-#importing to the db\ $\nDSN <- nz_init("NZSQLF","SPATIAL_SCHEMA")\ 
-nz_import_dir_to_db(DSN,"/home/crobertson/import/","mbpev","varchar(100)")\
- ```
+
+csv<-read.csv2("D:\\UserData\\Majid\\Downloads\\mpb-ev.csv",sep=",")
+head(csv)
+nz_convert_df_to_dggs(csv$DGGID,-1,csv,"E:\\home\\crobertson")\
+#importing to the db
+DSN <- nz_init("NZSQLF","SPATIAL_SCHEMA")
+nz_import_dir_to_db(DSN,"/home/crobertson/import/","mbpev","varchar(100)")
+```

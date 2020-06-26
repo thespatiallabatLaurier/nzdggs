@@ -49,3 +49,20 @@ lapply(files, function(x) {
 
 mkdocs gh-deploy -c -f ./mkdocs_material.yml
 ```
+To make a tuturial
+
+```r
+# make your Rmd file
+# then render it
+library(rmarkdown)
+render("vignettes//IDEAS-spatial-overlay.Rmd", md_document(variant = "markdown_github"))
+
+# then copy it under proper directory under /docs/Examples/IDEAS
+# push on the github
+# Run mkdocs gh-deploy -c -f ./mkdocs_material.yml
+
+```
+
+
+
+
