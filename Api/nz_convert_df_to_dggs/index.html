@@ -736,13 +736,13 @@
 </table>
 <h2 id="value">Value</h2>
 <h2 id="examples">Examples</h2>
-<p>```r
-csv&lt;-read.csv2("D:\UserData\Majid\Downloads\mpb-ev.csv",sep=",") <span><span class="MathJax_Preview">\nhead(csv)\ 
-nz_convert_df_to_dggs(csv</span><script type="math/tex">\nhead(csv)\ 
-nz_convert_df_to_dggs(csv</script></span>DGGID,-1,csv,"E:\home\crobertson") </p>
-<h1 id="importing-to-the-db-ndsn-nz_initnzsqlfspatial_schema">importing to the db $\nDSN &lt;- nz_init("NZSQLF","SPATIAL_SCHEMA")\</h1>
-<p>nz_import_dir_to_db(DSN,"/home/crobertson/import/","mbpev","varchar(100)")\
- ```</p>
+<div class="highlight"><pre><span></span><code><span class="n">csv</span><span class="o">&lt;-</span><span class="nf">read.csv2</span><span class="p">(</span><span class="s">&quot;D:\\UserData\\Majid\\Downloads\\mpb-ev.csv&quot;</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s">&quot;,&quot;</span><span class="p">)</span>
+<span class="nf">head</span><span class="p">(</span><span class="n">csv</span><span class="p">)</span>
+<span class="nf">nz_convert_df_to_dggs</span><span class="p">(</span><span class="n">csv</span><span class="o">$</span><span class="n">DGGID</span><span class="p">,</span><span class="m">-1</span><span class="p">,</span><span class="n">csv</span><span class="p">,</span><span class="s">&quot;E:\\home\\crobertson&quot;</span><span class="p">)</span>\
+<span class="c1">#importing to the db</span>
+<span class="n">DSN</span> <span class="o">&lt;-</span> <span class="nf">nz_init</span><span class="p">(</span><span class="s">&quot;NZSQLF&quot;</span><span class="p">,</span><span class="s">&quot;SPATIAL_SCHEMA&quot;</span><span class="p">)</span>
+<span class="nf">nz_import_dir_to_db</span><span class="p">(</span><span class="n">DSN</span><span class="p">,</span><span class="s">&quot;/home/crobertson/import/&quot;</span><span class="p">,</span><span class="s">&quot;mbpev&quot;</span><span class="p">,</span><span class="s">&quot;varchar(100)&quot;</span><span class="p">)</span>
+</code></pre></div>
                 
                   
                     
