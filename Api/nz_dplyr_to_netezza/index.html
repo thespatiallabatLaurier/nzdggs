@@ -732,12 +732,12 @@
 <h2 id="value">Value</h2>
 <p>A dplyr object from outputTable</p>
 <h2 id="examples">Examples</h2>
-<p><code>r
-DSN &lt;- nz_init("NZSQL","ADMIN")
-mbp &lt;- nz_table_as_dplyr(DSN,"MPB")
-head(mbp)
-mbp2 &lt;- nz_dplyr_to_netezza(DSN,mbp,"mbp2")
-head(mbp2)</code>r</p>
+<div class="highlight"><pre><span></span><code><span class="n">DSN</span> <span class="o">&lt;-</span> <span class="nf">nz_init</span><span class="p">(</span><span class="s">&quot;NZSQL&quot;</span><span class="p">,</span><span class="s">&quot;ADMIN&quot;</span><span class="p">)</span>
+<span class="n">mbp</span> <span class="o">&lt;-</span> <span class="nf">nz_table_as_dplyr</span><span class="p">(</span><span class="n">DSN</span><span class="p">,</span><span class="s">&quot;MPB&quot;</span><span class="p">)</span>
+<span class="nf">head</span><span class="p">(</span><span class="n">mbp</span><span class="p">)</span>
+<span class="n">mbp2</span> <span class="o">&lt;-</span> <span class="nf">nz_dplyr_to_netezza</span><span class="p">(</span><span class="n">DSN</span><span class="p">,</span><span class="n">mbp</span><span class="p">,</span><span class="s">&quot;mbp2&quot;</span><span class="p">)</span>
+<span class="nf">head</span><span class="p">(</span><span class="n">mbp2</span><span class="p">)</span>
+</code></pre></div>
                 
                   
                     
