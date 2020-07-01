@@ -22,41 +22,41 @@ con = dbConnect(RNetezza::Netezza(), dsn='NZSQL')
 ```
 We connect to a table containing spatial-time series of annual extreme daily climate variables for entire Canada. 
 
-```{r Loading Data, echo=FALSE}
+```{r Loading Data, echo=TRUE}
 data=tbl(con,"ANUSPLINE3")
 head(data)
 ```
 Next we slice the data set for annual maximum daily precipitation. 
-```{r Slice data, echo=FALSE}
+```{r Slice data, echo=TRUE}
 datap=data%>%filter(KEY=='PRECIPITATION')
 head(datap)
 ```
 We will calculate time-series of spatial average
 
-```{r Temporal Analysis, echo=FALSE}
+```{r Temporal Analysis, echo=TRUE}
 avgs=datap%>%group_by(TID)%>%arrange(TID)%>%summarise(VALUE=mean(VALUE))
 head(avgs)
 ```
 We will calculate spatial distribution of temporal average
 
-```{r Spatial Analysis, echo=FALSE}
+```{r Spatial Analysis, echo=TRUE}
 avgt=datap%>%group_by(DGGID)%>%arrange(DGGID)%>%summarise(VALUE=mean(VALUE))
 head(avgt)
 ```
 
 Let us plot some of these basic variables. 
 
-```{r Time-series Plots, echo=FALSE}
+```{r Time-series Plots, echo=TRUE}
 avgs=collect(avgs)
 plot(avgs$TID,avgs$VALUE)
 ```
 To plot the spatial variable we need to attach it with the spatial tabls.
-```{r Connect grid, echo=FALSE}
+```{r Connect grid, echo=TRUE}
 grid=tbl(con,"FINALGRID2")
 head(grid)
 ```
 
-```{r Spatial Plots, echo=FALSE}
+```{r Spatial Plots, echo=TRUE}
 avgt=avgt%>%inner_join(grid,by=c('DGGID'))%>%mutate(WKT=inza..ST_AsText(GEOM))%>%
   select(DGGID,VALUE,WKT)%>%arrange(DGGID)%>%head(100)%>%collect()
 
@@ -65,11 +65,11 @@ plot(poly['VALUE'])
 ```
 
 Lets get a little more complex now. We want to clip the data for one of the eco-zone over Canada say somwhere over BC, Pacific-Maritime (ecozone=13)
-```{r Connect ecozone, echo=FALSE}
+```{r Connect ecozone, echo=TRUE}
 ecozone=tbl(con,"ECOZONE_12")%>%filter(VALUE==13)%>%select(DGGID)
 head(ecozone)
 ```
-```{r Clip to ecozone, echo=FALSE}
+```{r Clip to ecozone, echo=TRUE}
 datape=datap%>%inner_join(ecozone,by=c('DGGID'))
 head(datape)
 ```
