@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/thespatiallabatlaurier/nzdggs.svg?branch=master)](https://travis-ci.com/am2222/nzdggs) [![Documentation Status](https://readthedocs.org/projects/nzdggs/badge/?version=latest)](https://thespatiallabatlaurier.github.io/nzdggs/)
+[![Build Status](https://travis-ci.com/am2222/nzdggs.svg?branch=master)](https://travis-ci.com/am2222/nzdggs) [![Documentation Status](https://readthedocs.org/projects/nzdggs/badge/?version=latest)](https://thespatiallabatlaurier.github.io/nzdggs/)
 
 ![Output Plot](docs/Examples/Rplot1.png)
 
