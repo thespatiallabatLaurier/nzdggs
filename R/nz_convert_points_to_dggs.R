@@ -35,13 +35,13 @@ nz_convert_points_df_to_dggs <- function(lat,lon,tid,res,df,save_in){
 
     if(NROW(res)==1){
       dggs <- dgsetres(dggs,res)
-      dgid = dgGEO_to_SEQNUM(dggs, lat, lon)$seqnum
+      dgid = dgGEO_to_SEQNUM(dggs, lon, lat)$seqnum
     }else{
       dggs= dgconstruct(res=1, metric=FALSE, resround='nearest',pole_lat_deg = 37,pole_lon_deg =-178)
 
       res_function <- function(lat,lon,res){
         dggs <- dgsetres(dggs,res)
-        dgid <- dgGEO_to_SEQNUM(dggs, lat, lon)$seqnum
+        dgid <- dgGEO_to_SEQNUM(dggs, lon, lat)$seqnum
         dgid
       }
 
@@ -106,7 +106,7 @@ nz_convert_points_to_dggs1 <- function(lat,lon,tid,resolution,df){
   if(NROW(lat) == NROW(long) && NROW(lat) == nrow(df)){
     if(NROW(resolution)==1){
       dggs= dgconstruct(res=resolution, metric=FALSE, resround='nearest',pole_lat_deg = 37,pole_lon_deg =-178)
-      dgid = dgGEO_to_SEQNUM(dggs, lat, long)$seqnum
+      dgid = dgGEO_to_SEQNUM(dggs,  long,lat)$seqnum
     }else{
 
       value <- rep(seq(1,5),length(dgid)/5)
@@ -114,7 +114,7 @@ nz_convert_points_to_dggs1 <- function(lat,lon,tid,resolution,df){
 
       calculate <- function(lat, lon, res) {
         dggs <- dgsetres(dggs, res)
-        dgid = dgGEO_to_SEQNUM(dggs, lat, long)$seqnum
+        dgid = dgGEO_to_SEQNUM(dggs, lpn,lat)$seqnum
         return(dgid)
       }
 
