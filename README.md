@@ -2,9 +2,9 @@
 
 ![Output Plot](docs/Examples/Rplot1.png)
 
-# Nzdggs
-Manipulate and Run Analysis on Netezza Using IDEAS Model
-
+# IDEAS
+Manipulate and Run Analysis Using IDEAS data model, as described in  [Robertson et
+al. 2020.](https://www.sciencedirect.com/science/article/pii/S0924271620300502)
 
 # Install
 
