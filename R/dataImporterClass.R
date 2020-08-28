@@ -113,8 +113,6 @@ ImporterClass <- R6::R6Class("DataImporter",
                           importFile = function(filename){
                            logDir = dirname(file.path(filename))
                            tblname <- stringr:::str_remove(private$tableName,"[.]")
-                           #sql= paste('drop table testexternaltbl1_',private$tableName,' if exists; ',sep="");
-                           #sqlQuery(private$odbcConnection, sql, errors = TRUE)
 
                            cols <- toString(unlist(do.call(Map, c(f = paste, unname( private$inputfilecolumns))), use.names = FALSE))
                            params <- paste(unlist(do.call(Map, c(f = paste, unname( private$externalTableParams ))), use.names = FALSE),collapse = " ")
@@ -125,38 +123,46 @@ ImporterClass <- R6::R6Class("DataImporter",
                                          cols ,"  ) USING (  DATAOBJECT(",paste("'",filename,"'",sep = ""),") REMOTESOURCE 'odbc' ",params," LOGDIR ",paste("'",logDir,"'",sep = "")," );create table testexternaltbl1_",tblname," as select * from externalname_",tblname,"; ",sep = "")
                            # "QUOTEDVALUE 'DOUBLE'  "
 
-
-                           insert_sql = paste("INSERT INTO ",private$tableName," (",gsub('([[:punct:]])|\\s+',',',toString(unlist(do.call(Map, c(f = paste, unname(private$finaltablecolumns$name))), use.names = FALSE)))," ) SELECT ",private$insertcolumns," FROM testexternaltbl1_",tblname,";",sep="")
                            print(paste("ExternalTableSql",string))
-                           print(paste("InsertSQL",insert_sql))
-
-
-
                            sqlQuery(private$odbcConnection, string, errors = TRUE)
-
-                           count<-sqlQuery(private$odbcConnection,paste("select count(*) from  testexternaltbl1_",tblname,sep = ""), errors = TRUE)
-                           print(paste("NumberOFRecordsInExternal",count))
 
                            countTableNameBefore<-sqlQuery(private$odbcConnection, paste("select count(*) from",private$tableName), errors = TRUE)
                            print(paste("CountBefore",countTableNameBefore))
 
+                           #insert all none string keys
+                           insert_sql = paste("INSERT INTO ",private$tableName," (",gsub('([[:punct:]])|\\s+',',',toString(unlist(do.call(Map, c(f = paste, unname(private$finaltablecolumns$name))), use.names = FALSE)))," ) SELECT ",private$insertcolumns," FROM testexternaltbl1_",tblname," where SQLEXT.strright(key, 4)!= '__ED' ;",sep="")
+                           print(paste("InsertSQL",insert_sql))
+                           sqlQuery(private$odbcConnection, insert_sql, errors = TRUE)
 
-                           sqlQuery(private$odbcConnection, paste("delete FROM testexternaltbl1_",tblname," where dggid='DGGID'",sep=""), errors = TRUE)
+                           #insert keys with __ED at the end
+                           insert_sql = paste(" ) SELECT ",private$insertcolumns," FROM testexternaltbl1_",tblname," where SQLEXT.strright(key, 4)!= '__ED' ;",sep="")
+                           insert_sql =  str_replace_all(insert_sql, "value", "SQLEXT.hash4(lower(value))")
+                           insert_sql =  str_replace(insert_sql, "!=", "=")
+                           insert_sql =  paste("INSERT INTO ",private$tableName," (",gsub('([[:punct:]])|\\s+',',',toString(unlist(do.call(Map, c(f = paste, unname(private$finaltablecolumns$name))), use.names = FALSE))),insert_sql)
 
+
+                           print(paste("InsertSQL",insert_sql))
                            sqlQuery(private$odbcConnection, insert_sql, errors = TRUE)
 
 
+                           #Add the keys to the table
+                           insert_sql =  paste("insert into SPATIAL_SCHEMA.KEYLOOKUPTABLE select b.* from (select SQLEXT.hash4(lower(value)) as HASH,value from (select unique(value) from testexternaltbl1_",tblname," where SQLEXT.strright(key, 4)='__ED' ) as a ) as b where b.HASH not in (select HASH from  SPATIAL_SCHEMA.KEYLOOKUPTABLE)",sep="")
+                           print(paste("InsertSQL",insert_sql))
+                           sqlQuery(private$odbcConnection, insert_sql, errors = TRUE)
 
-                             countTableNameAfter<-sqlQuery(private$odbcConnection, paste("select count(*) from",private$tableName), errors = TRUE)
-                             print(paste("countAfter",countTableNameAfter))
 
-                           # if (debug){
-                             #print(paste('log Directory is',logDir))
-                             #print(paste("ExternalTableSql",string))
-                             #print(paste("InsertSQL",insert_sql))
-                           # }
+                           #Counting the cells
+                           count<-sqlQuery(private$odbcConnection,paste("select count(*) from  testexternaltbl1_",tblname,sep = ""), errors = TRUE)
+                           print(paste("NumberOFRecordsInExternal",count))
 
-                             sqlQuery(private$odbcConnection, paste("drop table externalname_",tblname,",testexternaltbl1_",tblname," if exists;",sep = ""), errors = F)
+
+
+
+                           countTableNameAfter<-sqlQuery(private$odbcConnection, paste("select count(*) from",private$tableName), errors = TRUE)
+                           print(paste("countAfter",countTableNameAfter))
+
+                           #dropping external table
+                           sqlQuery(private$odbcConnection, paste("drop table externalname_",tblname,",testexternaltbl1_",tblname," if exists;",sep = ""), errors = F)
 
                          }
 

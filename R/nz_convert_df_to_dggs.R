@@ -41,8 +41,13 @@ nz_convert_df_to_dggs <- function(DGGID,TID,df,SaveIn,convertKeys='all'){
   }
 
   convert_keys <- function(key) {
-    df2 <- data.frame(VALUE=df[[key]],DGGID=DGGID,TID=TID,KEY=rep(key,length(DGGID)))
-    name<-paste(SaveIn,'\\',"_",key,'.csv',sep="")
+    if (class(df[[key]])=='factor'){
+      n_key=paste(key,"__ED",sep="")
+    }else{
+      n_key=key
+    }
+    df2 <- data.frame(VALUE=df[[key]],DGGID=DGGID,TID=TID,KEY=rep(n_key,length(DGGID)))
+    name<-paste(SaveIn,'\\',"_",n_key,'.csv',sep="")
     write.csv(df2,name, row.names=FALSE)
     rm(df2)
   }

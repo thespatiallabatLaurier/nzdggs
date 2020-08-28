@@ -11,7 +11,7 @@
 #' @export
 #'
 #' @examples \dontrun{
-#' DSN <- nz_init("NZSQL_F","SPATIAL_SCHEMA")
+#' DSN <- nz_init("NZSQLF","SPATIAL_SCHEMA")
 #' nz_add_metadata(DSN,"NLULCDATA")
 #' }
 nz_add_metadata <- function(DSN, table_name,description=NA,legend=NA){

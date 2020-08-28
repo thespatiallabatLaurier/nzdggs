@@ -39,6 +39,6 @@ Argument      |Description
 
 ## Examples
 
-```   
+```r
 nz_import_dir_to_db()
- ```   
+```   

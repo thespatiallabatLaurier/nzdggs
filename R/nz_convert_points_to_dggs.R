@@ -49,12 +49,19 @@ nz_convert_points_df_to_dggs <- function(lat,lon,tid,res,df,save_in){
 
     }
 
-
+    #loop over keys in df and convert them
     for (i in names(df)){
 
       value <- df[i]
-      df2 = data.frame(VALUE=value[[i]],DGGID=dgid,TID=tid,KEY=rep(i,length(dgid)))
-      name=paste(save_in,'\\',i,'.csv',sep="")
+
+      if (class(df[[i]])=='factor'){
+        n_key=paste(i,"__ED",sep="")
+      }else{
+        n_key=i
+      }
+
+      df2 = data.frame(VALUE=value[[i]],DGGID=dgid,TID=tid,KEY=rep(n_key,length(dgid)))
+      name=paste(save_in,'\\',n_key,'.csv',sep="")
       write.csv(df2,name, row.names=FALSE)
     }
 

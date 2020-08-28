@@ -81,8 +81,14 @@ nz_convert_polygon_to_dggs <- function(SpatialPolygonsDataFrame, Resolution,TID,
 
   convert_keys <- function(key) {
 
-    df2 <- data.frame(VALUE=SpatialPolygonsDataFrame[[key]],DGGID=udggid,TID=rep(TID,length(udggid)),KEY=rep(key,length(udggid)))
-    name<-paste(SaveIn,'\\',PolygonID,"_",key,'.csv',sep="")
+    if (class(SpatialPolygonsDataFrame[[key]])=='factor'){
+      n_key=paste(key,"__ED",sep="")
+    }else{
+      n_key=key
+    }
+
+    df2 <- data.frame(VALUE=SpatialPolygonsDataFrame[[key]],DGGID=udggid,TID=rep(TID,length(udggid)),KEY=rep(n_key,length(udggid)))
+    name<-paste(SaveIn,'\\',PolygonID,"_",n_key,'.csv',sep="")
     write.csv(df2,name, row.names=FALSE)
     rm(df2)
   }

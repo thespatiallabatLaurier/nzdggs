@@ -41,6 +41,7 @@ Argument      |Description
 ## Examples
 
 ```r
+
 zones = readOGR("ecozones.shp")\n", "for(i in seq(1,length(zones)))
 i= 1
   
@@ -64,4 +65,4 @@ i= 1
 
   DSN <- nz_init("NZSQL","SPATIAL_SCHEMA")
   nz_import_file_to_db(DSN,"E:/home/majid/cmb/cmb.csv","mpb","double",T,max_errors= 4400)
- ```
+```

@@ -8,7 +8,7 @@ nz_import_dir_to_db(
   DSN,
   directory,
   table_name,
-  value_type = "varchar",
+  value_type = "varchar(100)",
   createTable = T,
   max_errors = 2
 )
