@@ -117,13 +117,13 @@
     
       <div class="md-header-nav__source">
         
-<a href="https://github.com/am2222/nzdggs/" title="Go to repository" class="md-source">
+<a href="https://github.com/thespatiallabatLaurier/nzdggs/" title="Go to repository" class="md-source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
   </div>
   <div class="md-source__repository">
-    am2222/nzdggs
+    thespatiallabatLaurier/nzdggs
   </div>
 </a>
       </div>
@@ -158,13 +158,13 @@
   
     <div class="md-nav__source">
       
-<a href="https://github.com/am2222/nzdggs/" title="Go to repository" class="md-source">
+<a href="https://github.com/thespatiallabatLaurier/nzdggs/" title="Go to repository" class="md-source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
   </div>
   <div class="md-source__repository">
-    am2222/nzdggs
+    thespatiallabatLaurier/nzdggs
   </div>
 </a>
     </div>
@@ -216,8 +216,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../ImporterClass/" title="`ImporterClass`: Data imported Class" class="md-nav__link">
-      `ImporterClass`: Data imported Class
+    <a href="../Adds/" title="`nz_add_metadata`: Add metadata" class="md-nav__link">
+      `nz_add_metadata`: Add metadata
     </a>
   </li>
 
@@ -432,6 +432,18 @@
   <li class="md-nav__item">
     <a href="../nz_init/" title="`nz_init`: make nz db object" class="md-nav__link">
       `nz_init`: make nz db object
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../nz_keylookup_getkeys/" title="`nz_keylookup_getkeys`: keylookup table keys" class="md-nav__link">
+      `nz_keylookup_getkeys`: keylookup table keys
     </a>
   </li>
 
@@ -699,7 +711,7 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/am2222/nzdggs/edit/master/docs/Api/nz_convert_polygon_to_dggs.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/thespatiallabatLaurier/nzdggs/edit/master/docs/Api/nz_convert_polygon_to_dggs.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
@@ -759,36 +771,30 @@
 </table>
 <h2 id="value">Value</h2>
 <h2 id="examples">Examples</h2>
-<p>```r
-zones = readOGR("ecozones.shp")\n", "for(i in seq(1,length(zones)))
-i= 1</p>
-<p>print(i)
-  z = zones[i,]
-  nz_convert_polygon_to_dggs(z,1,12,i,'D:/UserData/Majid/Desktop/PLOTS/')</p>
-<p>library("nzdggs")
-  library("stampr")
-  data(mpb)
-  mpb<span><span class="MathJax_Preview">dt &lt;- Sys.Date()\n", "mpb</span><script type="math/tex">dt <- Sys.Date()\n", "mpb</script></span>YR &lt;- mpb<span><span class="MathJax_Preview">TGROUP+1996
-  mpb</span><script type="math/tex">TGROUP+1996
-  mpb</script></span>dt &lt;- as.Date(paste(mpb<span><span class="MathJax_Preview">YR, '-01-01', sep=""), "%Y-%m-%d")
-  mpb</span><script type="math/tex">YR, '-01-01', sep=""), "%Y-%m-%d")
-  mpb</script></span>tid &lt;- nz_convert_datetime_to_tid(mpb<span><span class="MathJax_Preview">dt, '1y')
-  proj4string(mpb) &lt;- '+proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 +lon_0=-126 +x_0=1000000 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m +no_defs'
-  mpb &lt;- spTransform(mpb, CRS("+init=epsg:4326")
-  mpb &lt;- mpb[,c(1,6)]
-  for(i in seq(1,length(mpb))){
-  z = mpb[i,]
-    nz_convert_polygon_to_dggs(z,20,z</span><script type="math/tex">dt, '1y')
-  proj4string(mpb) <- '+proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 +lon_0=-126 +x_0=1000000 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m +no_defs'
-  mpb <- spTransform(mpb, CRS("+init=epsg:4326")
-  mpb <- mpb[,c(1,6)]
-  for(i in seq(1,length(mpb))){
-  z = mpb[i,]
-    nz_convert_polygon_to_dggs(z,20,z</script></span>tid,z$ID,"E:\\home\\crobertson\\")
-  }</p>
-<p>DSN &lt;- nz_init("NZSQL","SPATIAL_SCHEMA")
-  nz_import_file_to_db(DSN,"E:/home/majid/cmb/cmb.csv","mpb","double",T,max_errors= 4400)
- ```</p>
+<div class="highlight"><pre><span></span><code><span class="n">zones</span> <span class="o">=</span> <span class="nf">readOGR</span><span class="p">(</span><span class="s">&quot;ecozones.shp&quot;</span><span class="p">)</span>\<span class="n">n</span><span class="s">&quot;, &quot;</span><span class="nf">for</span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="nf">seq</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="nf">length</span><span class="p">(</span><span class="n">zones</span><span class="p">)))</span>
+<span class="n">i</span><span class="o">=</span> <span class="m">1</span>
+
+  <span class="nf">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+  <span class="n">z</span> <span class="o">=</span> <span class="n">zones</span><span class="p">[</span><span class="n">i</span><span class="p">,]</span>
+  <span class="nf">nz_convert_polygon_to_dggs</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">12</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="s">&#39;D:/UserData/Majid/Desktop/PLOTS/&#39;</span><span class="p">)</span>
+
+  <span class="nf">library</span><span class="p">(</span><span class="s">&quot;nzdggs&quot;</span><span class="p">)</span>
+  <span class="nf">library</span><span class="p">(</span><span class="s">&quot;stampr&quot;</span><span class="p">)</span>
+  <span class="nf">data</span><span class="p">(</span><span class="n">mpb</span><span class="p">)</span>
+  <span class="n">mpb</span><span class="o">$</span><span class="n">dt</span> <span class="o">&lt;-</span> <span class="nf">Sys.Date</span><span class="p">()</span>\<span class="n">n</span><span class="s">&quot;, &quot;</span><span class="n">mpb</span><span class="o">$</span><span class="n">YR</span> <span class="o">&lt;-</span> <span class="n">mpb</span><span class="o">$</span><span class="n">TGROUP</span><span class="m">+1996</span>
+  <span class="n">mpb</span><span class="o">$</span><span class="n">dt</span> <span class="o">&lt;-</span> <span class="nf">as.Date</span><span class="p">(</span><span class="nf">paste</span><span class="p">(</span><span class="n">mpb</span><span class="o">$</span><span class="n">YR</span><span class="p">,</span> <span class="s">&#39;-01-01&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">),</span> <span class="s">&quot;%Y-%m-%d&quot;</span><span class="p">)</span>
+  <span class="n">mpb</span><span class="o">$</span><span class="n">tid</span> <span class="o">&lt;-</span> <span class="nf">nz_convert_datetime_to_tid</span><span class="p">(</span><span class="n">mpb</span><span class="o">$</span><span class="n">dt</span><span class="p">,</span> <span class="s">&#39;1y&#39;</span><span class="p">)</span>
+  <span class="nf">proj4string</span><span class="p">(</span><span class="n">mpb</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="s">&#39;+proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 +lon_0=-126 +x_0=1000000 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m +no_defs&#39;</span>
+  <span class="n">mpb</span> <span class="o">&lt;-</span> <span class="nf">spTransform</span><span class="p">(</span><span class="n">mpb</span><span class="p">,</span> <span class="nf">CRS</span><span class="p">(</span><span class="s">&quot;+init=epsg:4326&quot;</span><span class="p">)</span>
+  <span class="n">mpb</span> <span class="o">&lt;-</span> <span class="n">mpb</span><span class="p">[,</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">6</span><span class="p">)]</span>
+  <span class="nf">for</span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="nf">seq</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="nf">length</span><span class="p">(</span><span class="n">mpb</span><span class="p">))){</span>
+  <span class="n">z</span> <span class="o">=</span> <span class="n">mpb</span><span class="p">[</span><span class="n">i</span><span class="p">,]</span>
+    <span class="nf">nz_convert_polygon_to_dggs</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="m">20</span><span class="p">,</span><span class="n">z</span><span class="o">$</span><span class="n">tid</span><span class="p">,</span><span class="n">z</span><span class="o">$</span><span class="n">ID</span><span class="p">,</span><span class="s">&quot;E:\\\\home\\\\crobertson\\\\&quot;</span><span class="p">)</span>
+  <span class="p">}</span>
+
+  <span class="n">DSN</span> <span class="o">&lt;-</span> <span class="nf">nz_init</span><span class="p">(</span><span class="s">&quot;NZSQL&quot;</span><span class="p">,</span><span class="s">&quot;SPATIAL_SCHEMA&quot;</span><span class="p">)</span>
+  <span class="nf">nz_import_file_to_db</span><span class="p">(</span><span class="n">DSN</span><span class="p">,</span><span class="s">&quot;E:/home/majid/cmb/cmb.csv&quot;</span><span class="p">,</span><span class="s">&quot;mpb&quot;</span><span class="p">,</span><span class="s">&quot;double&quot;</span><span class="p">,</span><span class="bp">T</span><span class="p">,</span><span class="n">max_errors</span><span class="o">=</span> <span class="m">4400</span><span class="p">)</span>
+</code></pre></div>
                 
                   
                     
@@ -797,7 +803,7 @@ i= 1</p>
 <div class="md-source-date">
   <small>
     
-      Last update: June 25, 2020
+      Last update: August 28, 2020
     
   </small>
 </div>
