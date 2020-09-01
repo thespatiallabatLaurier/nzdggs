@@ -54,7 +54,7 @@ nz_convert_points_df_to_dggs <- function(lat,lon,tid,res,df,save_in){
 
       value <- df[i]
 
-      if (class(df[[i]])=='factor'){
+      if (class(df[[i]]) %in% c('factor','character') ){
         n_key=paste(i,"__ED",sep="")
       }else{
         n_key=i
@@ -135,9 +135,17 @@ nz_convert_points_to_dggs1 <- function(lat,lon,tid,resolution,df){
 
 
     for(i in names(df)){
+
       value <- df[i]
-      df2 = data.frame(VALUE=value[[i]],DGGID=dgid,TID=tid,KEY=rep(i,length(dgid)))
-      name=paste(i,'.csv',sep="")
+
+      if (class(df[[i]]) %in% c('factor','character') ){
+        n_key=paste(i,"__ED",sep="")
+      }else{
+        n_key=i
+      }
+
+      df2 = data.frame(VALUE=value[[i]],DGGID=dgid,TID=tid,KEY=rep(n_key,length(dgid)))
+      name=paste(n_key,'.csv',sep="")
       write.csv(df2,name, row.names=FALSE)
     }
 

@@ -81,7 +81,7 @@ nz_convert_polygon_to_dggs <- function(SpatialPolygonsDataFrame, Resolution,TID,
 
   convert_keys <- function(key) {
 
-    if (class(SpatialPolygonsDataFrame[[key]])=='factor'){
+    if (class(SpatialPolygonsDataFrame[[key]]) %in% c('factor','character') ){
       n_key=paste(key,"__ED",sep="")
     }else{
       n_key=key

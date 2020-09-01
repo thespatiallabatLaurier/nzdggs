@@ -41,7 +41,7 @@ nz_convert_df_to_dggs <- function(DGGID,TID,df,SaveIn,convertKeys='all'){
   }
 
   convert_keys <- function(key) {
-    if (class(df[[key]])=='factor'){
+    if (class(df[[key]]) %in% c('factor','character')){
       n_key=paste(key,"__ED",sep="")
     }else{
       n_key=key
